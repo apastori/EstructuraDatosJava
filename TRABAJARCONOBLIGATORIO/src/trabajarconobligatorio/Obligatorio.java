@@ -8,27 +8,50 @@ import java.util.Date;
  */
 public class Obligatorio implements IObligatorio {
 
+    private Lista<Contacto> listaContactos;
+    // lista diccionario
+
+    public Obligatorio() {
+        listaContactos = new Lista(5);
+    }
+
     @Override
     public Retorno crearSistemaMensajes(int MAX_CANT_PALABRAS_X_LINEA) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        listaContactos = new Lista(5);
         return ret;
     }
 
     @Override
     public Retorno destruirSistemaMensajes() {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        listaContactos.vaciar();
         return ret;
     }
 
     @Override
     public Retorno agregarContacto(int numContacto, String nomContacto) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        Contacto nuevoContacto = new Contacto(numContacto, nomContacto);
+        if (listaContactos.obtenerElemento(nuevoContacto) == null) {
+            listaContactos.agregarInicio(nuevoContacto);
+            ret.resultado = Retorno.Resultado.OK;
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR;
+        }
         return ret;
     }
 
     @Override
     public Retorno eliminarContacto(int numContacto) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);        
+        Contacto contactoBuscado = new Contacto(numContacto);        
+        if (listaContactos.obtenerElemento(contactoBuscado) != null) {            
+            listaContactos.borrarElemento(contactoBuscado);
+            ret.resultado = Retorno.Resultado.OK;
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR;
+        }
         return ret;
     }
 
@@ -81,13 +104,15 @@ public class Obligatorio implements IObligatorio {
     }
 
     @Override
-    public Retorno insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+    public Retorno insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra,
+            String palabraAIngresar) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         return ret;
     }
 
     @Override
-    public Retorno insertarPalabraYDesplazar(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+    public Retorno insertarPalabraYDesplazar(int numContactoOrigen, int numMensaje, int posicionLinea,
+            int posicionPalabra, String palabraAIngresar) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         return ret;
     }
@@ -99,7 +124,8 @@ public class Obligatorio implements IObligatorio {
     }
 
     @Override
-    public Retorno borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, String palabraABorrar) {
+    public Retorno borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea,
+            String palabraABorrar) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         return ret;
     }
