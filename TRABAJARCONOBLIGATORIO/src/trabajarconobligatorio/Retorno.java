@@ -7,14 +7,12 @@ public class Retorno {
 
 	int valorEntero;
 	String valorString;
-         boolean valorbooleano;
+	boolean valorbooleano;
 	Resultado resultado;
 
-    public Retorno(Resultado resultado) {
+	public Retorno(Resultado resultado) {
 
-        this.resultado = resultado;
-    }
-        
-        
-        
+		this.resultado = resultado;
+	}
+
 }
