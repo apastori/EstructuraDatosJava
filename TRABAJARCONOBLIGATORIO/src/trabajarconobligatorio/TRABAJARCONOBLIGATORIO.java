@@ -2,7 +2,6 @@ package trabajarconobligatorio;
 
 import java.util.Date;
 
-import trabajarconobligatorio.Genericos.Obligatorio;
 import trabajarconobligatorio.Genericos.Prueba;
 import trabajarconobligatorio.Genericos.Retorno;
 
