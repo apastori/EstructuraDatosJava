@@ -1,7 +1,7 @@
 
-package trabajarconobligatorio;
+package trabajarconobligatorio.Genericos;
 
-import trabajarconobligatorio.Retorno.Resultado;
+import trabajarconobligatorio.Genericos.Retorno.Resultado;
 
 public class Prueba {
 
@@ -60,7 +60,7 @@ public class Prueba {
 		}
 	}
 
-	void imprimirResultadosPrueba() {
+	public void imprimirResultadosPrueba() {
 		System.out.println();
 		System.out.println("  +------------------------------+");
 		System.out.println("    RESULTADOS DE LA PRUEBA    ");

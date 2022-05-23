@@ -1,14 +1,14 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Genericos;
 
 public class Retorno {
-	enum Resultado {
+	public enum Resultado {
 		OK, ERROR, NO_IMPLEMENTADA
 	};
 
 	int valorEntero;
 	String valorString;
 	boolean valorbooleano;
-	Resultado resultado;
+	public Resultado resultado;
 
 	public Retorno(Resultado resultado) {
 
