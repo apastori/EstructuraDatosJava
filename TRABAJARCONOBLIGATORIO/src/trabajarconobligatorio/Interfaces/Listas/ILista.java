@@ -1,4 +1,4 @@
-package trabajarconobligatorio.Interfaces;
+package trabajarconobligatorio.Interfaces.Listas;
 
 import trabajarconobligatorio.Genericos.Nodo;
 
@@ -39,7 +39,4 @@ public interface ILista<T extends Comparable<T>> {
     //pre: n es un entero
     //post: retronar el nodo que contiene el dato n
     public Nodo obtenerElemento(T n);
-
-    //post: muestra la lista (realizar en forma recursiva)
-    public void mostrarREC(Nodo l);
 }

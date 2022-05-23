@@ -1,22 +1,15 @@
-package trabajarconobligatorio.Genericos;
+package trabajarconobligatorio.Genericos.Listas;
 
-import trabajarconobligatorio.Interfaces.ILista;
+import trabajarconobligatorio.Genericos.Nodo;
+import trabajarconobligatorio.Interfaces.Listas.ILista;
 
-public class Lista<T extends Comparable<T>> implements ILista<T> {
+public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     private Nodo<T> inicio;
     private Nodo<T> fin;
     private int cantidad;
-    private int tope;
 
     // Constructor
-    public Lista(int topeMax) {
-        inicio = null;
-        fin = null;
-        cantidad = 0;
-        tope = topeMax;
-    }
-
-    public Lista() {
+    public ListaSinTope() {
         inicio = null;
         fin = null;
         cantidad = 0;
@@ -35,14 +28,10 @@ public class Lista<T extends Comparable<T>> implements ILista<T> {
             fin = inicio;
             cantidad++;
         } else {
-            if (cantidad < tope) {
                 nuevo.setSiguiente(getInicio());
                 inicio.setAnterior(nuevo);
                 inicio = nuevo;
                 cantidad++;
-            } else {
-                System.out.println("Esta Llena");
-            }
         }
     }
 
@@ -52,14 +41,10 @@ public class Lista<T extends Comparable<T>> implements ILista<T> {
         if (this.esVacia()) {
             agregarInicio(n);
         } else {
-            if (cantidad < tope) {
-                fin.setSiguiente(nuevo);
-                nuevo.setAnterior(fin);
-                fin = nuevo;
-                cantidad++;
-            } else {
-                System.out.println("Esta Llena");
-            }
+            fin.setSiguiente(nuevo);
+            nuevo.setAnterior(fin);
+            fin = nuevo;
+            cantidad++;
         }
     }
 
@@ -142,7 +127,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T> {
     }
 
     @Override
-    public Nodo obtenerElemento(T n) {
+    public Nodo<T> obtenerElemento(T n) {
         Nodo<T> ret = null;
         if (!this.esVacia()) {
             // inicio.getDato() == n
@@ -187,15 +172,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T> {
         }
     }
 
-    @Override
-    public void mostrarREC(Nodo l) {
-        if (l != null) {
-            System.out.print(l.getDato() + " - ");
-            mostrarREC(l.getSiguiente());
-        }
-    }
-
-    public Nodo getInicio() {
+    public Nodo<T> getInicio() {
         return inicio;
     }
 }

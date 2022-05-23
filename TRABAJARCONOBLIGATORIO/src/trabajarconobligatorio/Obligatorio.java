@@ -1,9 +1,13 @@
-package trabajarconobligatorio.Genericos;
+package trabajarconobligatorio;
 
 import java.util.Date;
 
+import trabajarconobligatorio.Genericos.Retorno;
+import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
+import trabajarconobligatorio.Genericos.Retorno.Resultado;
 import trabajarconobligatorio.Interfaces.IObligatorio;
 import trabajarconobligatorio.Modelos.Contacto;
+import trabajarconobligatorio.Modelos.Sistema;
 
 /**
  *
@@ -11,24 +15,25 @@ import trabajarconobligatorio.Modelos.Contacto;
  */
 public class Obligatorio implements IObligatorio {
 
-    private Lista<Contacto> listaContactos;
+    private Sistema Sistema;
     // lista diccionario
 
     public Obligatorio() {
-        listaContactos = new Lista(5);
+        Sistema = new Sistema(Integer.MAX_VALUE);
     }
 
     @Override
     public Retorno crearSistemaMensajes(int MAX_CANT_PALABRAS_X_LINEA) {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
-        listaContactos = new Lista(5);
+        Sistema = new Sistema(MAX_CANT_PALABRAS_X_LINEA);
         return ret;
     }
 
     @Override
     public Retorno destruirSistemaMensajes() {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
-        listaContactos.vaciar();
+        Sistema.destruir();
+        Sistema = null;
         return ret;
     }
 
@@ -36,8 +41,7 @@ public class Obligatorio implements IObligatorio {
     public Retorno agregarContacto(int numContacto, String nomContacto) {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
         Contacto nuevoContacto = new Contacto(numContacto, nomContacto);
-        if (listaContactos.obtenerElemento(nuevoContacto) == null) {
-            listaContactos.agregarInicio(nuevoContacto);
+        if (Sistema.agregarContacto(nuevoContacto)) {
             ret.resultado = Retorno.Resultado.OK;
         } else {
             ret.resultado = Retorno.Resultado.ERROR;
@@ -48,13 +52,14 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno eliminarContacto(int numContacto) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);        
-        Contacto contactoBuscado = new Contacto(numContacto);        
-        if (listaContactos.obtenerElemento(contactoBuscado) != null) {            
-            listaContactos.borrarElemento(contactoBuscado);
+        Contacto contactoBuscado = new Contacto(numContacto);  
+
+        if (Sistema.eliminarContacto(contactoBuscado)) {            
             ret.resultado = Retorno.Resultado.OK;
         } else {
             ret.resultado = Retorno.Resultado.ERROR;
         }
+
         return ret;
     }
 
