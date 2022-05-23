@@ -1,4 +1,4 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Genericos;
 
 public class Nodo<T extends Comparable<T>> {
     // Atributos

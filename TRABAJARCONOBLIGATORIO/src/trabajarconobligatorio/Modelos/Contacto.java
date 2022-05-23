@@ -1,4 +1,4 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Modelos;
 
 public class Contacto implements Comparable<Contacto> {
     private int numero;

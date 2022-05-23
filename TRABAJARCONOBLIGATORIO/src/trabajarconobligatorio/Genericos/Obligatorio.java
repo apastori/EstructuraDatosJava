@@ -1,6 +1,9 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Genericos;
 
 import java.util.Date;
+
+import trabajarconobligatorio.Interfaces.IObligatorio;
+import trabajarconobligatorio.Modelos.Contacto;
 
 /**
  *

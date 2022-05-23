@@ -1,4 +1,6 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Genericos;
+
+import trabajarconobligatorio.Interfaces.ILista;
 
 public class Lista<T extends Comparable<T>> implements ILista<T> {
     private Nodo<T> inicio;

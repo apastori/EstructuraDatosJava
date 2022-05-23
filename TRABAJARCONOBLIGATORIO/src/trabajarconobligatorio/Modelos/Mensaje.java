@@ -1,4 +1,4 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
 

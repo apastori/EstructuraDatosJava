@@ -1,4 +1,6 @@
-package trabajarconobligatorio;
+package trabajarconobligatorio.Interfaces;
+
+import trabajarconobligatorio.Genericos.Nodo;
 
 public interface ILista<T extends Comparable<T>> {
     //metodos de la interfaz

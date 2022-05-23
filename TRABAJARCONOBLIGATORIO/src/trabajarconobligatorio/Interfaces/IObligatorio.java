@@ -1,6 +1,8 @@
 
-package trabajarconobligatorio;
+package trabajarconobligatorio.Interfaces;
 import java.util.Date;
+
+import trabajarconobligatorio.Genericos.Retorno;
 /**
  *
  * @author Rafael
