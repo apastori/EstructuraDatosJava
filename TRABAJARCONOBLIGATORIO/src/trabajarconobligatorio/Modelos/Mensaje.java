@@ -7,11 +7,14 @@ public class Mensaje {
     private int numContactoOrigen;
     private int numContactoDestino;
     private Date fecha;
+    private int identifador;
     // agregar lista de lineas
 
-    public Mensaje(int elOrigen, int elDestino) {
+    public Mensaje(int elOrigen, int elDestino, Date laFecha) {
         this.setNumContactoOrigen(elOrigen);
         this.setNumContactoDestino(elDestino);
+        this.setFecha(laFecha);
+        identifador++;
     }
 
     public int getNumContactoOrigen() {
