@@ -20,12 +20,14 @@ public class TRABAJARCONOBLIGATORIO {
 
     public static void juegodeprueba1(Obligatorio obl, Prueba p) {
         // escriba su juego de prueba aqui
-        p.ver(obl.crearSistemaMensajes(3).resultado, Retorno.Resultado.OK, "Se creara sistma para 3 palabras por linea");
-        p.ver(obl.agregarContacto(1, "Juan Perez").resultado, Retorno.Resultado.OK, "se agrega contacto Juan Perez al sistema");
-        p.ver(obl.agregarContacto(1, "Juan Perez").resultado, Retorno.Resultado.ERROR, "se intenta agregar contacto Juan Perez que ya existe");
+        p.ver(obl.crearSistemaMensajes(3).resultado, Retorno.Resultado.OK,
+                "Se creara sistma para 3 palabras por linea");
+        p.ver(obl.agregarContacto(1, "Juan Perez").resultado, Retorno.Resultado.OK,
+                "se agrega contacto Juan Perez al sistema");
+        p.ver(obl.agregarContacto(1, "Juan Perez").resultado, Retorno.Resultado.ERROR,
+                "se intenta agregar contacto Juan Perez que ya existe");
         p.ver(obl.eliminarContacto(1).resultado, Retorno.Resultado.OK, "se elimina contacto Juan Perez del sistema");
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, " sistema eliminado");
-
         p.imprimirResultadosPrueba();
     }
 }
