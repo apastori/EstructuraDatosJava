@@ -33,6 +33,7 @@ public class Obligatorio implements IObligatorio {
     public Retorno destruirSistemaMensajes() {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
         Sistema.destruir();
+        Sistema = null;
         return ret;
     }
 
@@ -58,7 +59,7 @@ public class Obligatorio implements IObligatorio {
         } else {
             ret.resultado = Retorno.Resultado.ERROR;
         }
-        
+
         return ret;
     }
 
