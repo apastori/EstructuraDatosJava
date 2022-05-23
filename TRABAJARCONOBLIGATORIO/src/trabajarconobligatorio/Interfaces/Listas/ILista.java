@@ -38,5 +38,5 @@ public interface ILista<T extends Comparable<T>> {
 
     //pre: n es un entero
     //post: retronar el nodo que contiene el dato n
-    public Nodo obtenerElemento(T n);
+    public Nodo<T> obtenerElemento(T n);
 }
