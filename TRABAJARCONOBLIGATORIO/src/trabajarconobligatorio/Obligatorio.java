@@ -7,6 +7,7 @@ import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Retorno.Resultado;
 import trabajarconobligatorio.Interfaces.IObligatorio;
 import trabajarconobligatorio.Modelos.Contacto;
+import trabajarconobligatorio.Modelos.Mensaje;
 import trabajarconobligatorio.Modelos.Sistema;
 
 /**
@@ -51,9 +52,8 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno eliminarContacto(int numContacto) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);        
+        Retorno ret = new Retorno(Retorno.Resultado.OK);        
         Contacto contactoBuscado = new Contacto(numContacto);  
-
         if (Sistema.eliminarContacto(contactoBuscado)) {            
             ret.resultado = Retorno.Resultado.OK;
         } else {
@@ -66,6 +66,14 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno agregarMensaje(int numContactoOrigen, int numContactoDestino, Date fecha) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Contacto contactoOrigen = new Contacto(numContactoOrigen);
+        Contacto contactoDestino = new Contacto(numContactoDestino);   
+        Mensaje nuevoMensaje = new Mensaje(numContactoOrigen, numContactoDestino, fecha);
+        if(Sistema.agregarMensaje(contactoOrigen, contactoDestino, nuevoMensaje)){
+            ret.resultado = Retorno.Resultado.OK;
+        }else{
+            ret.resultado = Retorno.Resultado.ERROR;
+        }
         return ret;
     }
 

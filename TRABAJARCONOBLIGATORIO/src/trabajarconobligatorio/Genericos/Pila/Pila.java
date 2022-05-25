@@ -1,5 +1,6 @@
-package trabajarconobligatorio.Genericos;
+package trabajarconobligatorio.Genericos.Pila;
 
+import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Interfaces.IPila;
 
 public class Pila<T extends Comparable<T>> implements IPila<T> {
