@@ -2,7 +2,7 @@ package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
 
-public class Mensaje {
+public class Mensaje implements Comparable<Mensaje> {
 
     private int numContactoOrigen;
     private int numContactoDestino;
@@ -45,10 +45,14 @@ public class Mensaje {
     // return this.getNombre().equalsIgnoreCase(((Contacto)o).getNombre());
     // }
 
-    // @Override
-    // public int compareTo(Contacto o) {
-    // return this.getNombre().compareTo(o.getNombre());
-    // }
+    @Override
+    public int compareTo(Mensaje o) {
+        if (this.identifador == o.identifador) {
+            return 0;
+        } else {
+            return 1;
+        }        
+    }
 
     public String toString() {
         return "Numero Origen: " + this.getNumContactoOrigen() + " Numero Destino: " + this.getNumContactoDestino()
