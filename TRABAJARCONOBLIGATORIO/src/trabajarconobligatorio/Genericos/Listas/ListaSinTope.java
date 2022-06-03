@@ -130,16 +130,13 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     public Nodo<T> obtenerElemento(T n) {
         Nodo<T> ret = null;
         if (!this.esVacia()) {
-            // inicio.getDato() == n
             if (inicio.getDato().compareTo(n) == 0) {
                 ret = inicio;
             } else {
-                // fin.getDato() == n
                 if (fin.getDato().compareTo(n) == 0) {
                     ret = fin;
                 } else {
                     Nodo<T> actual = getInicio();
-                    boolean encontre = false;
                     while (actual != null && actual.getDato() != n) {
                         actual = actual.getSiguiente();
                     }
@@ -175,4 +172,52 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     public Nodo<T> getInicio() {
         return inicio;
     }
+
+    public Nodo<T> NodoMedio(Nodo<T> inicio, Nodo<T> fin)
+    {
+        if (inicio == null)
+            return null;
+ 
+            Nodo<T> lento = inicio;
+            Nodo<T> rapido = inicio;
+ 
+        while (rapido != fin)
+        {
+            rapido = rapido.getSiguiente();
+            if (rapido != fin)
+            {
+                lento = lento.getSiguiente();
+                rapido = rapido.getSiguiente();
+            }
+        }
+        return lento;
+    }
+
+    public Nodo<T> busquedaBinaria(Nodo<T> head, T obj)
+    {
+        Nodo<T> inicio = head;
+        Nodo<T> fin = null;
+ 
+        do
+        {
+            Nodo<T> medio = NodoMedio(inicio, fin);
+ 
+            if (medio == null){
+                return null;
+            }
+ 
+            if (medio.getDato().equals(obj)) {
+                    return medio;
+            }
+            else if (medio.getDato().compareTo(obj) == -1)
+            {
+                inicio = medio.getSiguiente();
+            } else {
+                fin = medio;
+            }
+        } while (fin == null || fin != inicio);
+ 
+        return null;
+    }
+ 
 }

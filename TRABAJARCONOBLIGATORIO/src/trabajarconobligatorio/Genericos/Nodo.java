@@ -3,8 +3,8 @@ package trabajarconobligatorio.Genericos;
 public class Nodo<T extends Comparable<T>> {
     // Atributos
     private T dato;
-    private Nodo siguiente;
-    private Nodo anterior;
+    private Nodo<T> siguiente;
+    private Nodo<T> anterior;
 
     // Constructor
     public Nodo(T elDato) {
@@ -22,19 +22,19 @@ public class Nodo<T extends Comparable<T>> {
         this.dato = dato;
     }
 
-    public Nodo getSiguiente() {
+    public Nodo<T> getSiguiente() {
         return siguiente;
     }
 
-    public void setSiguiente(Nodo siguiente) {
+    public void setSiguiente(Nodo<T> siguiente) {
         this.siguiente = siguiente;
     }
 
-    public Nodo getAnterior() {
+    public Nodo<T> getAnterior() {
         return anterior;
     }
 
-    public void setAnterior(Nodo anterior) {
+    public void setAnterior(Nodo<T> anterior) {
         this.anterior = anterior;
     }
 }

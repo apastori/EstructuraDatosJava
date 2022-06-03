@@ -1,13 +1,19 @@
 package trabajarconobligatorio.Modelos;
 
+import trabajarconobligatorio.Genericos.Nodo;
+import trabajarconobligatorio.Genericos.Pila.PilaSinTope;
+
 public class Contacto implements Comparable<Contacto> {
     private int numero;
     private String nombre;
-    // agregar lista de mensajes
+    private PilaSinTope<Mensaje> Mensajes;
+    private int MAX_CANT_PALABRAS_X_LINEA; 
 
-    public Contacto(int elNumero, String elNombre) {
+    public Contacto(int elNumero, String elNombre, int MAX_CANT_PALABRAS_X_LINEA) {
         this.setNumero(elNumero);
         this.setNombre(elNombre);
+        this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
+        Mensajes = new PilaSinTope<Mensaje>();
     }
 
     public Contacto(int elNumero) {
@@ -30,6 +36,21 @@ public class Contacto implements Comparable<Contacto> {
         this.nombre = nombre;
     }
 
+    public PilaSinTope<Mensaje> getMensajesPorDestinatario(int numero){
+        PilaSinTope<Mensaje> ret = new PilaSinTope<Mensaje>();
+
+        Nodo<Mensaje> aux = Mensajes.getInicio();
+        while( aux != null) {
+            var mensaje = aux.getDato(); 
+            if(mensaje.getNumContactoDestino() == numero){
+                ret.apilar(mensaje);
+            }
+            aux = aux.getSiguiente();
+        }
+        return ret;
+    }
+
+
     // public boolean equals(Object o) {
     // return this.getNombre().equalsIgnoreCase(((Contacto) o).getNombre());
     // }
@@ -48,9 +69,11 @@ public class Contacto implements Comparable<Contacto> {
     public int compareTo(Contacto o) {
         if (this.numero == o.numero) {
             return 0;
-        } else {
+        } else if (this.numero > o.numero){
             return 1;
-        }        
+        } else {
+            return -1;
+        }
     }
 
     public String toString() {

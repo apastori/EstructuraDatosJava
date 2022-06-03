@@ -3,11 +3,8 @@ package trabajarconobligatorio;
 import java.util.Date;
 
 import trabajarconobligatorio.Genericos.Retorno;
-import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
-import trabajarconobligatorio.Genericos.Retorno.Resultado;
 import trabajarconobligatorio.Interfaces.IObligatorio;
 import trabajarconobligatorio.Modelos.Contacto;
-import trabajarconobligatorio.Modelos.Mensaje;
 import trabajarconobligatorio.Modelos.Sistema;
 
 /**
@@ -41,8 +38,7 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno agregarContacto(int numContacto, String nomContacto) {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
-        Contacto nuevoContacto = new Contacto(numContacto, nomContacto);
-        if (Sistema.agregarContacto(nuevoContacto)) {
+        if (Sistema.agregarContacto(numContacto, nomContacto)) {
             ret.resultado = Retorno.Resultado.OK;
         } else {
             ret.resultado = Retorno.Resultado.ERROR;
@@ -66,10 +62,8 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno agregarMensaje(int numContactoOrigen, int numContactoDestino, Date fecha) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        Contacto contactoOrigen = new Contacto(numContactoOrigen);
-        Contacto contactoDestino = new Contacto(numContactoDestino);   
-        Mensaje nuevoMensaje = new Mensaje(numContactoOrigen, numContactoDestino, fecha);
-        if(Sistema.agregarMensaje(contactoOrigen, contactoDestino, nuevoMensaje)){
+        
+        if(Sistema.agregarMensaje(numContactoOrigen, numContactoDestino, fecha)){
             ret.resultado = Retorno.Resultado.OK;
         }else{
             ret.resultado = Retorno.Resultado.ERROR;

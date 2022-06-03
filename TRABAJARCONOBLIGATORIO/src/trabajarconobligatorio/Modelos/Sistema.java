@@ -1,5 +1,6 @@
 package trabajarconobligatorio.Modelos;
 
+import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Pila.PilaSinTope;
 
@@ -20,9 +21,10 @@ public class Sistema {
         pilaMensajes = null;
     }
 
-    public boolean agregarContacto(Contacto nuevoContacto) {
+    public boolean agregarContacto(int numContacto, String nomContacto) {
+        Contacto nuevoContacto = new Contacto(numContacto, nomContacto, this.MAX_CANT_PALABRAS_X_LINEA);
         if (listaContactos.obtenerElemento(nuevoContacto) == null) {
-            listaContactos.agregarInicio(nuevoContacto);
+            listaContactos.agregarOrd(nuevoContacto);
             return true;
         } else {
             return false;
@@ -38,13 +40,29 @@ public class Sistema {
         }
     }
 
-    public boolean agregarMensaje(Contacto contactoOrigen, Contacto contactoDestino, Mensaje nuevoMensaje) {
-        if (listaContactos.obtenerElemento(contactoOrigen) != null
-                && listaContactos.obtenerElemento(contactoDestino) != null) {
-            pilaMensajes.apilar(nuevoMensaje);
-            return true;
-        } else {
+    public boolean agregarMensaje(int numContactoOrigen, int numContactoDestino, java.util.Date fecha) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        Contacto contactoDestino = getContactoPorNumero(numContactoDestino);
+
+        if(contactoOrigen == null || contactoDestino == null){
             return false;
         }
+
+        var nuevoId = contactoOrigen.getMensajesPorDestinatario(numContactoDestino).elementos() + 1;
+
+        Mensaje nuevoMensaje = new Mensaje(numContactoDestino, fecha, nuevoId,MAX_CANT_PALABRAS_X_LINEA);
+
+        pilaMensajes.apilar(nuevoMensaje);
+        return true;
     }
+
+    public Contacto getContactoPorNumero( int numero ){
+        Nodo<Contacto> contacto = listaContactos.busquedaBinaria(listaContactos.getInicio(), new Contacto(numero));
+        if(contacto != null){
+            return contacto.getDato();
+        }
+        return null;
+    }
+
+    
 }

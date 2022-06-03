@@ -2,43 +2,32 @@ package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
 
+import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
+
 public class Mensaje implements Comparable<Mensaje> {
 
-    private int numContactoOrigen;
     private int numContactoDestino;
     private Date fecha;
-    private int identifador;
-    // agregar lista de lineas
+    private int id;
+    public ListaSinTope<Linea> Lineas;
 
-    public Mensaje(int elOrigen, int elDestino, Date laFecha) {
-        this.setNumContactoOrigen(elOrigen);
-        this.setNumContactoDestino(elDestino);
-        this.setFecha(laFecha);
-        identifador++;
-    }
-
-    public int getNumContactoOrigen() {
-        return numContactoOrigen;
-    }
-
-    public void setNumContactoOrigen(int numero) {
-        this.numContactoOrigen = numero;
+    public Mensaje(int elDestino, Date laFecha, int id, int MAX_CANT_PALABRAS_X_LINEA) {
+        this.numContactoDestino = elDestino;
+        this.fecha = laFecha;
+        Lineas = new ListaSinTope<Linea>();
+        this.id = id;
     }
 
     public int getNumContactoDestino() {
         return numContactoDestino;
     }
 
-    public void setNumContactoDestino(int numero) {
-        this.numContactoDestino = numero;
-    }
-
     public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public int getId(){
+        return id;
     }
 
     // public boolean equals(Object o){
@@ -47,7 +36,7 @@ public class Mensaje implements Comparable<Mensaje> {
 
     @Override
     public int compareTo(Mensaje o) {
-        if (this.identifador == o.identifador) {
+        if (this.id == o.id) {
             return 0;
         } else {
             return 1;
@@ -55,7 +44,7 @@ public class Mensaje implements Comparable<Mensaje> {
     }
 
     public String toString() {
-        return "Numero Origen: " + this.getNumContactoOrigen() + " Numero Destino: " + this.getNumContactoDestino()
+        return " Numero Destino: " + this.getNumContactoDestino()
                 + " Fecha: " + this.getFecha();
     }
 }
