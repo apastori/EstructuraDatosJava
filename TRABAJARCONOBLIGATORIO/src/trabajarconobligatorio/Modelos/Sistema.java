@@ -1,24 +1,22 @@
 package trabajarconobligatorio.Modelos;
 
+import java.util.Date;
+
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
-import trabajarconobligatorio.Genericos.Pila.PilaSinTope;
 
 public class Sistema {
     private ListaSinTope<Contacto> listaContactos;
-    private PilaSinTope<Mensaje> pilaMensajes;
     private Integer MAX_CANT_PALABRAS_X_LINEA;
 
     public Sistema(int MAX_CANT_PALABRAS_X_LINEA) {
-        listaContactos = new ListaSinTope();
-        pilaMensajes = new PilaSinTope();
+        listaContactos = new ListaSinTope<Contacto>();
         this.MAX_CANT_PALABRAS_X_LINEA = Integer.MAX_VALUE;
     }
 
     public void destruir() {
         MAX_CANT_PALABRAS_X_LINEA = null;
         listaContactos.vaciar();
-        pilaMensajes = null;
     }
 
     public boolean agregarContacto(int numContacto, String nomContacto) {
@@ -31,8 +29,9 @@ public class Sistema {
         }
     }
 
-    public boolean eliminarContacto(Contacto contactoBuscado) {
-        if (listaContactos.obtenerElemento(contactoBuscado) != null) {
+    public boolean eliminarContacto(int numContacto) {
+        Contacto contactoBuscado = new Contacto(numContacto);  
+        if (listaContactos.busquedaBinaria(listaContactos.getInicio(), contactoBuscado) != null) {
             listaContactos.borrarElemento(contactoBuscado);
             return true;
         } else {
@@ -40,7 +39,7 @@ public class Sistema {
         }
     }
 
-    public boolean agregarMensaje(int numContactoOrigen, int numContactoDestino, java.util.Date fecha) {
+    public boolean agregarMensaje(int numContactoOrigen, int numContactoDestino, Date fecha) {
         Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
         Contacto contactoDestino = getContactoPorNumero(numContactoDestino);
 
@@ -48,12 +47,16 @@ public class Sistema {
             return false;
         }
 
-        var nuevoId = contactoOrigen.getMensajesPorDestinatario(numContactoDestino).elementos() + 1;
-
-        Mensaje nuevoMensaje = new Mensaje(numContactoDestino, fecha, nuevoId,MAX_CANT_PALABRAS_X_LINEA);
-
-        pilaMensajes.apilar(nuevoMensaje);
+        contactoOrigen.agregarMensaje(numContactoDestino, fecha);
         return true;
+    }
+
+    public boolean eliminarMensaje(int numContactoOrigen, int numMensaje) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null){
+            return contactoOrigen.eliminarMensaje(numMensaje);
+        }
+        return false;
     }
 
     public Contacto getContactoPorNumero( int numero ){
@@ -63,6 +66,5 @@ public class Sistema {
         }
         return null;
     }
-
     
 }
