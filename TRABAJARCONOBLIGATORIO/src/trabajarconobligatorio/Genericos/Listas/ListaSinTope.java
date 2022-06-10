@@ -14,6 +14,10 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         fin = null;
         cantidad = 0;
     }
+    @Override
+    public int getCantidadElementos(){
+        return cantidad;
+    }
 
     @Override
     public boolean esVacia() {
@@ -22,7 +26,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
 
     @Override
     public void agregarInicio(T n) {
-        Nodo<T> nuevo = new Nodo(n);
+        Nodo<T> nuevo = new Nodo<T>(n);
         if (esVacia()) {
             inicio = nuevo;
             fin = inicio;
@@ -37,7 +41,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
 
     @Override
     public void agregarFinal(T n) {
-        Nodo<T> nuevo = new Nodo(n);
+        Nodo<T> nuevo = new Nodo<T>(n);
         if (this.esVacia()) {
             agregarInicio(n);
         } else {
@@ -161,7 +165,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
                 while (aux.getSiguiente() != null && aux.getSiguiente().getDato().compareTo(n) < 0) {
                     aux = aux.getSiguiente();
                 }
-                Nodo<T> nuevo = new Nodo(n);
+                Nodo<T> nuevo = new Nodo<T>(n);
                 nuevo.setSiguiente(aux.getSiguiente());
                 aux.setSiguiente(nuevo);
             }

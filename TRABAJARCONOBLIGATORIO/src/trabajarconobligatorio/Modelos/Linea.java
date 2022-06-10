@@ -1,13 +1,12 @@
 package trabajarconobligatorio.Modelos;
 
-import trabajarconobligatorio.Genericos.Listas.ListaCompleta;
 import trabajarconobligatorio.Genericos.Pila.Pila;
 
 public class Linea implements Comparable<Linea> {
     private Pila<String> Palabras;
 
-    public Linea(){
-        Palabras = new Pila<String>();
+    public Linea(int MAX_CANT_PALABRAS_X_LINEA){
+        Palabras = new Pila<String>(MAX_CANT_PALABRAS_X_LINEA);
     }
 
     @Override

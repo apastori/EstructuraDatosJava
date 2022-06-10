@@ -15,7 +15,7 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
 
     @Override
     public void apilar(T dato) {
-        Nodo<T> nuevo = new Nodo(dato);
+        Nodo<T> nuevo = new Nodo<T>(dato);
         if (esVacia()) {
             inicio = nuevo;
         } else {
@@ -56,7 +56,7 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
     }
 
     @Override
-    public Nodo cima() {
+    public Nodo<T> cima() {
         return inicio;
     }
 
@@ -67,7 +67,7 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
 
     @Override
     public void mostrarPila() {
-        Nodo mostrar = getInicio();
+        Nodo<T> mostrar = getInicio();
         while (mostrar != null) {
             System.out.println(mostrar.getDato());
             mostrar = mostrar.getSiguiente();
@@ -76,7 +76,7 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
         System.out.println("");
     }
 
-    public Nodo getInicio() {
+    public Nodo<T> getInicio() {
         return inicio;
     }
 }
