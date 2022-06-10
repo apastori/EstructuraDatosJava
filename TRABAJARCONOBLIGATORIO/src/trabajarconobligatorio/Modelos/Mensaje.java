@@ -3,6 +3,8 @@ package trabajarconobligatorio.Modelos;
 import java.util.Date;
 
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
+import trabajarconobligatorio.Genericos.Nodo;
+import trabajarconobligatorio.Genericos.Pila.Pila;
 
 public class Mensaje implements Comparable<Mensaje> {
 
@@ -33,6 +35,25 @@ public class Mensaje implements Comparable<Mensaje> {
     // public boolean equals(Object o){
     // return this.getNombre().equalsIgnoreCase(((Contacto)o).getNombre());
     // }
+    
+      public String imprimirMensaje() {
+        String textoMensaje = "";
+        if (!this.Lineas.esVacia()) {
+            Nodo lineaActual = this.Lineas.getInicio();
+            int contador = 1;
+            while (lineaActual.getSiguiente() != null) {
+                textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea();
+                lineaActual = lineaActual.getSiguiente();
+                contador++;
+            }
+            
+        } else {
+            textoMensaje = "Mensaje Vacio";
+        }
+        return textoMensaje;
+    }
+      
+
 
     @Override
     public int compareTo(Mensaje o) {
@@ -42,7 +63,8 @@ public class Mensaje implements Comparable<Mensaje> {
             return 1;
         }        
     }
-
+    
+    @Override
     public String toString() {
         return " Numero Destino: " + this.getNumContactoDestino()
                 + " Fecha: " + this.getFecha();
