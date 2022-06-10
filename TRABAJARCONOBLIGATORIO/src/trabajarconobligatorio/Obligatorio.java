@@ -4,7 +4,6 @@ import java.util.Date;
 
 import trabajarconobligatorio.Genericos.Retorno;
 import trabajarconobligatorio.Interfaces.IObligatorio;
-import trabajarconobligatorio.Modelos.Contacto;
 import trabajarconobligatorio.Modelos.Sistema;
 
 /**
@@ -48,32 +47,34 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno eliminarContacto(int numContacto) {
-        Retorno ret = new Retorno(Retorno.Resultado.OK);        
-        Contacto contactoBuscado = new Contacto(numContacto);  
-        if (Sistema.eliminarContacto(contactoBuscado)) {            
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);    
+
+        if (Sistema.eliminarContacto(numContacto)) {            
             ret.resultado = Retorno.Resultado.OK;
-        } else {
-            ret.resultado = Retorno.Resultado.ERROR;
-        }
+        } 
 
         return ret;
     }
 
     @Override
     public Retorno agregarMensaje(int numContactoOrigen, int numContactoDestino, Date fecha) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
         
         if(Sistema.agregarMensaje(numContactoOrigen, numContactoDestino, fecha)){
             ret.resultado = Retorno.Resultado.OK;
-        }else{
-            ret.resultado = Retorno.Resultado.ERROR;
         }
+
         return ret;
     }
 
     @Override
     public Retorno eliminarMensaje(int numContactoOrigen, int numMensaje) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if(Sistema.eliminarMensaje(numContactoOrigen, numMensaje)){
+            ret.resultado = Retorno.Resultado.OK;
+        }else{
+            ret.resultado = Retorno.Resultado.ERROR;
+        }
         return ret;
     }
 

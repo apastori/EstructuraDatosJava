@@ -1,7 +1,6 @@
 package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
-
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Pila.Pila;
@@ -17,6 +16,10 @@ public class Mensaje implements Comparable<Mensaje> {
         this.numContactoDestino = elDestino;
         this.fecha = laFecha;
         Lineas = new ListaSinTope<Linea>();
+        this.id = id;
+    }
+
+    public Mensaje( int id){
         this.id = id;
     }
 
@@ -59,9 +62,11 @@ public class Mensaje implements Comparable<Mensaje> {
     public int compareTo(Mensaje o) {
         if (this.id == o.id) {
             return 0;
-        } else {
+        } else if (this.id > o.id) {
             return 1;
-        }        
+        } else {
+            return -1;
+        }
     }
     
     @Override

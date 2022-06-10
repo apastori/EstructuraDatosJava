@@ -30,7 +30,7 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
 
     @Override
     public void agregarInicio(T n) {
-        Nodo<T> nuevo = new Nodo(n);
+        Nodo<T> nuevo = new Nodo<T>(n);
         if (esVacia()) {
             inicio = nuevo;
             fin = inicio;
@@ -49,7 +49,7 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
 
     @Override
     public void agregarFinal(T n) {
-        Nodo<T> nuevo = new Nodo(n);
+        Nodo<T> nuevo = new Nodo<T>(n);
         if (this.esVacia()) {
             agregarInicio(n);
         } else {
@@ -143,7 +143,7 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
     }
 
     @Override
-    public Nodo obtenerElemento(T n) {
+    public Nodo<T> obtenerElemento(T n) {
         Nodo<T> ret = null;
         if (!this.esVacia()) {
             // inicio.getDato() == n
@@ -155,7 +155,6 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
                     ret = fin;
                 } else {
                     Nodo<T> actual = getInicio();
-                    boolean encontre = false;
                     while (actual != null && actual.getDato() != n) {
                         actual = actual.getSiguiente();
                     }
@@ -180,7 +179,7 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
                 while (aux.getSiguiente() != null && aux.getSiguiente().getDato().compareTo(n) < 0) {
                     aux = aux.getSiguiente();
                 }
-                Nodo<T> nuevo = new Nodo(n);
+                Nodo<T> nuevo = new Nodo<T>(n);
                 nuevo.setSiguiente(aux.getSiguiente());
                 aux.setSiguiente(nuevo);
             }
@@ -188,7 +187,12 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
         }
     }
 
-    public Nodo getInicio() {
+    public Nodo<T> getInicio() {
         return inicio;
+    }
+
+    @Override
+    public int getCantidadElementos() {
+        return cantidad;
     }
 }

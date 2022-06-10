@@ -8,8 +8,10 @@ import trabajarconobligatorio.Genericos.Pila.Pila;
 public class Linea implements Comparable<Linea> {
     private Pila<String> Palabras;
 
-    public Linea(int cantidadMaxima){
+
+    public Linea(int cantidadMaxima) {
         Palabras = new Pila<String>(cantidadMaxima);
+
     }
 
     public String imprimirLinea() {

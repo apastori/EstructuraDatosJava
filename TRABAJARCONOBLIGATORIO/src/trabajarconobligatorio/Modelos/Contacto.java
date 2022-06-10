@@ -1,19 +1,21 @@
 package trabajarconobligatorio.Modelos;
 
+import java.util.Date;
+
 import trabajarconobligatorio.Genericos.Nodo;
-import trabajarconobligatorio.Genericos.Pila.PilaSinTope;
+import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 
 public class Contacto implements Comparable<Contacto> {
     private int numero;
     private String nombre;
-    private PilaSinTope<Mensaje> Mensajes;
-    private int MAX_CANT_PALABRAS_X_LINEA; 
+    private ListaSinTope<Mensaje> Mensajes;
+    private int MAX_CANT_PALABRAS_X_LINEA;
 
     public Contacto(int elNumero, String elNombre, int MAX_CANT_PALABRAS_X_LINEA) {
         this.setNumero(elNumero);
         this.setNombre(elNombre);
         this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
-        Mensajes = new PilaSinTope<Mensaje>();
+        Mensajes = new ListaSinTope<Mensaje>();
     }
 
     public Contacto(int elNumero) {
@@ -36,18 +38,43 @@ public class Contacto implements Comparable<Contacto> {
         this.nombre = nombre;
     }
 
-    public PilaSinTope<Mensaje> getMensajesPorDestinatario(int numero){
-        PilaSinTope<Mensaje> ret = new PilaSinTope<Mensaje>();
+    public ListaSinTope<Mensaje> getMensajesPorDestinatario(int numero){
+        ListaSinTope<Mensaje> ret = new ListaSinTope<Mensaje>();
 
         Nodo<Mensaje> aux = Mensajes.getInicio();
         while( aux != null) {
             var mensaje = aux.getDato(); 
             if(mensaje.getNumContactoDestino() == numero){
-                ret.apilar(mensaje);
+                ret.agregarFinal(mensaje);
             }
             aux = aux.getSiguiente();
         }
         return ret;
+    }
+
+    public void agregarMensaje(int numContactoDestino, Date fecha){
+        int nuevoId = Mensajes.getCantidadElementos() + 1;
+        Mensaje nuevoMensaje = new Mensaje(numContactoDestino, fecha, nuevoId, MAX_CANT_PALABRAS_X_LINEA);
+        Mensajes.agregarFinal(nuevoMensaje);
+    }
+
+    
+    public boolean eliminarMensaje(int numMensaje) {
+        Nodo<Mensaje> mensajeAEliminar = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+
+        if(mensajeAEliminar == null){
+            return false;
+        }
+
+        Nodo<Mensaje> anterior = mensajeAEliminar.getAnterior();
+        Nodo<Mensaje> siguiente = mensajeAEliminar.getSiguiente();
+        
+        anterior.setSiguiente(siguiente);
+        siguiente.setAnterior(anterior);
+
+        mensajeAEliminar.setAnterior(null);
+        mensajeAEliminar.setSiguiente(null);
+        return true;
     }
 
 
@@ -79,4 +106,5 @@ public class Contacto implements Comparable<Contacto> {
     public String toString() {
         return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
+
 }
