@@ -66,5 +66,18 @@ public class Sistema {
         }
         return null;
     }
+
+    public boolean insertarLinea(int numContactoOrigen, int numMensaje) {
+        boolean lineaInsertada = false;
+        Contacto contacto = getContactoPorNumero(numContactoOrigen);
+        if (contacto != null) {
+            Mensaje mensaje = contacto.getMensajePorId(numMensaje);
+            if (mensaje != null) {
+                mensaje.insertarLineaFinal();
+                lineaInsertada = true;
+            }
+        }
+        return lineaInsertada;
+    }
     
 }

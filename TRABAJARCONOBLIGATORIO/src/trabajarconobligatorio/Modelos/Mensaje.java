@@ -11,12 +11,14 @@ public class Mensaje implements Comparable<Mensaje> {
     private Date fecha;
     private int id;
     public ListaSinTope<Linea> Lineas;
+    private int MAX_CANT_PALABRAS_X_LINEA;
 
     public Mensaje(int elDestino, Date laFecha, int id, int MAX_CANT_PALABRAS_X_LINEA) {
         this.numContactoDestino = elDestino;
         this.fecha = laFecha;
         Lineas = new ListaSinTope<Linea>();
         this.id = id;
+        this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
     }
 
     public Mensaje( int id){
@@ -56,8 +58,11 @@ public class Mensaje implements Comparable<Mensaje> {
         return textoMensaje;
     }
       
-
-
+    public void insertarLineaFinal() {
+        Linea nuevaLinea = new Linea(this.MAX_CANT_PALABRAS_X_LINEA);
+        this.Lineas.insertarFinalRecursivo(this.Lineas.getInicio(), nuevaLinea);
+    }
+      
     @Override
     public int compareTo(Mensaje o) {
         if (this.id == o.id) {
