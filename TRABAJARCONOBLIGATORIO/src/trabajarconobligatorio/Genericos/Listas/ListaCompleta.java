@@ -195,4 +195,16 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
     public int getCantidadElementos() {
         return cantidad;
     }
+
+    @Override
+    public boolean agregarEnPosicion(T n, int pos) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Nodo<T> obtenerElementoPosRecursivo(int pos, Nodo<T> inicio, int contador) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

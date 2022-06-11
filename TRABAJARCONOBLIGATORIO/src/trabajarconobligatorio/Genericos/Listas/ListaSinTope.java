@@ -223,5 +223,43 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
  
         return null;
     }
- 
+    @Override
+    public boolean agregarEnPosicion(T n, int pos) {
+        if(pos >= 1 && pos <= cantidad + 1) {
+
+            Nodo<T> nuevo = new Nodo<T>(n);
+
+            if(pos == 1){
+                if(inicio != null){
+                    nuevo.setSiguiente(inicio);
+                    inicio.setAnterior(nuevo);
+                }
+                inicio = nuevo;
+                fin = nuevo;
+            }
+            else if (pos == cantidad + 1) {
+                nuevo.setAnterior(fin);
+                fin.setSiguiente(nuevo);
+                fin = nuevo;
+            }
+            else {
+                Nodo<T> desplazado = obtenerElementoPosRecursivo(pos, inicio, 1);
+                Nodo<T> anterior = desplazado.getAnterior();
+                anterior.setSiguiente(nuevo);
+                nuevo.setAnterior(anterior);
+                desplazado.setAnterior(nuevo);
+                nuevo.setSiguiente(desplazado);
+            }
+            cantidad++;
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public Nodo<T> obtenerElementoPosRecursivo(int pos, Nodo<T> inicio, int contador) {
+        if(pos == contador){
+            return inicio.getSiguiente();
+        }
+        return obtenerElementoPosRecursivo(pos, inicio.getSiguiente(), contador+1);
+    }
 }
