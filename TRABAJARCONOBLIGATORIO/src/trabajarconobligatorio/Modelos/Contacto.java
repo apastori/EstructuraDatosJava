@@ -38,6 +38,7 @@ public class Contacto implements Comparable<Contacto> {
         this.nombre = nombre;
     }
 
+    // TODO: Revisar si se usa al final
     public ListaSinTope<Mensaje> getMensajesPorDestinatario(int numero){
         ListaSinTope<Mensaje> ret = new ListaSinTope<Mensaje>();
 
@@ -77,6 +78,26 @@ public class Contacto implements Comparable<Contacto> {
         return true;
     }
 
+    public Mensaje getMensajePorNumero(int numMensaje) {
+        Nodo<Mensaje> mensaje = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if(mensaje != null){
+            return mensaje.getDato();
+        }
+        return null;
+    }
+    
+
+    public boolean insertarLineaEnPosicion(int numMensaje, int posicionLinea) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            return mensaje.insertarLineaEnPosicion(posicionLinea);
+        }
+        return false;
+    }
+
+
+
 
     // public boolean equals(Object o) {
     // return this.getNombre().equalsIgnoreCase(((Contacto) o).getNombre());
@@ -106,5 +127,4 @@ public class Contacto implements Comparable<Contacto> {
     public String toString() {
         return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
-
 }

@@ -3,7 +3,6 @@ package trabajarconobligatorio.Modelos;
 import java.util.Date;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Nodo;
-import trabajarconobligatorio.Genericos.Pila.Pila;
 
 public class Mensaje implements Comparable<Mensaje> {
 
@@ -11,12 +10,14 @@ public class Mensaje implements Comparable<Mensaje> {
     private Date fecha;
     private int id;
     public ListaSinTope<Linea> Lineas;
+    private int MAX_CANT_PALABRAS_X_LINEA;
 
     public Mensaje(int elDestino, Date laFecha, int id, int MAX_CANT_PALABRAS_X_LINEA) {
         this.numContactoDestino = elDestino;
         this.fecha = laFecha;
         Lineas = new ListaSinTope<Linea>();
         this.id = id;
+        this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
     }
 
     public Mensaje( int id){
@@ -39,10 +40,10 @@ public class Mensaje implements Comparable<Mensaje> {
     // return this.getNombre().equalsIgnoreCase(((Contacto)o).getNombre());
     // }
     
-      public String imprimirMensaje() {
+      public String getTextoMensaje() {
         String textoMensaje = "";
         if (!this.Lineas.esVacia()) {
-            Nodo lineaActual = this.Lineas.getInicio();
+            Nodo<Linea> lineaActual = this.Lineas.getInicio();
             int contador = 1;
             while (lineaActual.getSiguiente() != null) {
                 textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea();
@@ -60,18 +61,34 @@ public class Mensaje implements Comparable<Mensaje> {
 
     @Override
     public int compareTo(Mensaje o) {
-        if (this.id == o.id) {
-            return 0;
-        } else if (this.id > o.id) {
-            return 1;
-        } else {
-            return -1;
-        }
+        return Integer.compare(id, o.id);
     }
     
     @Override
     public String toString() {
         return " Numero Destino: " + this.getNumContactoDestino()
                 + " Fecha: " + this.getFecha();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+ 
+        if (!(o instanceof Mensaje)) {
+            return false;
+        }
+         
+        Mensaje m = (Mensaje) o;
+         
+        return id == m.id;
+    }
+
+    public boolean insertarLineaEnPosicion(int posicionLinea) {
+
+        Linea n = new Linea(MAX_CANT_PALABRAS_X_LINEA);
+        return Lineas.agregarEnPosicion(n, posicionLinea);
+
     }
 }

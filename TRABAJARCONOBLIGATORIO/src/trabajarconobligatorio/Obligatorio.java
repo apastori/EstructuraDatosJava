@@ -69,18 +69,20 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno eliminarMensaje(int numContactoOrigen, int numMensaje) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
         if(Sistema.eliminarMensaje(numContactoOrigen, numMensaje)){
             ret.resultado = Retorno.Resultado.OK;
-        }else{
-            ret.resultado = Retorno.Resultado.ERROR;
         }
         return ret;
     }
 
     @Override
     public Retorno imprimirTexto(int numContactoOrigen, int numMensaje) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+
+        if(Sistema.imprimirTexto(numContactoOrigen, numMensaje)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 
@@ -92,7 +94,12 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno insertarLineaEnPosicion(int numContactoOrigen, int numMensaje, int posicionLinea) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        
+        if(Sistema.insertarLineaEnPosicion(numContactoOrigen, numMensaje, posicionLinea)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
+
         return ret;
     }
 
