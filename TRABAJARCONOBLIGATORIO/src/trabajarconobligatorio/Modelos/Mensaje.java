@@ -57,8 +57,11 @@ public class Mensaje implements Comparable<Mensaje> {
         return textoMensaje;
     }
       
-
-
+    public void insertarLineaFinal() {
+        Linea nuevaLinea = new Linea(this.MAX_CANT_PALABRAS_X_LINEA);
+        this.Lineas.insertarFinalRecursivo(this.Lineas.getInicio(), nuevaLinea);
+    }
+      
     @Override
     public int compareTo(Mensaje o) {
         return Integer.compare(id, o.id);

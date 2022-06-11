@@ -2,6 +2,7 @@ package trabajarconobligatorio.Genericos.Listas;
 
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Interfaces.Listas.ILista;
+import trabajarconobligatorio.Modelos.Linea;
 
 public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     private Nodo<T> inicio;
@@ -223,6 +224,23 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
  
         return null;
     }
+  
+    public void insertarFinalRecursivo(Nodo<T> inicio, T objeto) {
+        Nodo<T> nuevoNodo = new Nodo<T>(objeto);
+        if (inicio == null) {
+            inicio = nuevoNodo;
+            fin = nuevoNodo;
+            return;
+        }
+        if (inicio.getSiguiente() == null) {
+            inicio.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(inicio);
+            this.cantidad++;
+            return;
+        }
+        insertarFinalRecursivo(inicio.getSiguiente(), objeto); 
+    }
+  
     @Override
     public boolean agregarEnPosicion(T n, int pos) {
         if(pos >= 1 && pos <= cantidad + 1) {
@@ -255,6 +273,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         }
         return false;
     }
+  
     @Override
     public Nodo<T> obtenerElementoPosRecursivo(int pos, Nodo<T> inicio, int contador) {
         if(pos == contador){
