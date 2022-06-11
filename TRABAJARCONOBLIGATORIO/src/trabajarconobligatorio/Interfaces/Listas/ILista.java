@@ -29,10 +29,13 @@ public interface ILista<T extends Comparable<T>> {
     //post: se muestran todos los elementos de la lista en orden 
     public void mostrar();
 
-    //pre: n es un entero
+    //pre: n es comparable
     //pre: la lista esta ordenada en forma ascendente
     //post: se interta el elemento n en forma ordenada
     public void agregarOrd(T n);
+
+    //post: inserta el elemento en la posición indicada desplazando a los que le siguen.
+    public boolean agregarEnPosicion(T n, int pos);
 
     //pre: n es un entero
     //post: se elimina la primera ocurrencia de n en la lista
@@ -41,4 +44,8 @@ public interface ILista<T extends Comparable<T>> {
     //pre: n es un entero
     //post: retronar el nodo que contiene el dato n
     public Nodo<T> obtenerElemento(T n);
+
+    //pre: (pos >= 1) y (pos <= cantidad de elementos actuales).
+    //post: retorna el nodo correspondiente a la posición solicitada
+    public Nodo<T> obtenerElementoPosRecursivo(int pos, Nodo<T> inicio, int contador);
 }
