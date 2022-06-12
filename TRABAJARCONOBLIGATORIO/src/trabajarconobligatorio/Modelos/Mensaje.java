@@ -55,9 +55,7 @@ public class Mensaje implements Comparable<Mensaje> {
             textoMensaje = "Mensaje Vacio";
         }
         return textoMensaje;
-    }
-      
-
+    }          
 
     @Override
     public int compareTo(Mensaje o) {
@@ -91,4 +89,9 @@ public class Mensaje implements Comparable<Mensaje> {
         return Lineas.agregarEnPosicion(n, posicionLinea);
 
     }
+
+    public boolean borrarLineaEnPosicion(int posicionLinea) {       
+        return Lineas.borrarEnPosicion(posicionLinea);
+    }
+    
 }

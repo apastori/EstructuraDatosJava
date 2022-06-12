@@ -91,5 +91,18 @@ public class Sistema {
         return false;
     }
 
+    public boolean borrarLinea(int numContactoOrigen, int numMensaje, int posicionLinea){
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            if(contactoOrigen.encontrarMensaje(numMensaje)){
+                return contactoOrigen.borrarLineaEnPosicion(numMensaje,posicionLinea);
+            }else{
+                //mensaje no existe
+                return false;
+            }
+        }
+        //contacto no existe
+        return false;
+    }
     
 }
