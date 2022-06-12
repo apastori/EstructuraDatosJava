@@ -77,6 +77,15 @@ public class Contacto implements Comparable<Contacto> {
         mensajeAEliminar.setSiguiente(null);
         return true;
     }
+    
+    public Mensaje getMensajePorId(int numMensaje) {
+        Mensaje mensaje = null;
+        Nodo<Mensaje> nodoMensaje = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if (nodoMensaje != null) {
+            mensaje = nodoMensaje.getDato();
+        }
+        return mensaje;
+    }
 
     public Mensaje getMensajePorNumero(int numMensaje) {
         Nodo<Mensaje> mensaje = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
