@@ -105,7 +105,23 @@ public class Contacto implements Comparable<Contacto> {
         return false;
     }
 
+    public boolean encontrarMensaje(int numMensaje) {
+        Nodo<Mensaje> mensajeBuscado = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if (mensajeBuscado == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    public boolean borrarLineaEnPosicion(int numMensaje, int posicionLinea){
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+        if(mensaje != null){
+            return mensaje.borrarLineaEnPosicion(posicionLinea);
+        }else{
+            return false;
+        }
+    }
 
 
     // public boolean equals(Object o) {

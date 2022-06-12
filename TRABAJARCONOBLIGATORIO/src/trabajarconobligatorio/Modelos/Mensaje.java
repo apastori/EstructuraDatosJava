@@ -55,6 +55,9 @@ public class Mensaje implements Comparable<Mensaje> {
             textoMensaje = "Mensaje Vacio";
         }
         return textoMensaje;
+
+
+
     }
       
     public void insertarLineaFinal() {
@@ -62,6 +65,7 @@ public class Mensaje implements Comparable<Mensaje> {
         this.Lineas.insertarFinalRecursivo(this.Lineas.getInicio(), nuevaLinea);
     }
       
+
     @Override
     public int compareTo(Mensaje o) {
         return Integer.compare(id, o.id);
@@ -94,4 +98,9 @@ public class Mensaje implements Comparable<Mensaje> {
         return Lineas.agregarEnPosicion(n, posicionLinea);
 
     }
+
+    public boolean borrarLineaEnPosicion(int posicionLinea) {       
+        return Lineas.borrarEnPosicion(posicionLinea);
+    }
+    
 }
