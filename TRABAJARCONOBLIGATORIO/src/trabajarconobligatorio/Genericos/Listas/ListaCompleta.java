@@ -207,4 +207,10 @@ public class ListaCompleta<T extends Comparable<T>> implements ILista<T> {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public void vaciarRecursivo(Nodo<T> ultimo) {
+        // TODO Auto-generated method stub
+        
+    }
 }

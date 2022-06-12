@@ -111,7 +111,12 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno borrarTodo(int numContactoOrigen, int numMensaje) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        
+        if(Sistema.borrarTodo(numContactoOrigen, numMensaje)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
+
         return ret;
     }
 

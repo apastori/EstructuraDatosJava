@@ -25,6 +25,10 @@ public interface ILista<T extends Comparable<T>> {
 
     //post: se vacia la lista
     public void vaciar();
+    
+    //pre: debe recibir el último nodo de la lista en su primera llamada.
+    //post: se vacia la lista y se desvinculan todos los nodos.
+    public void vaciarRecursivo(Nodo<T> ultimo);
 
     //post: se muestran todos los elementos de la lista en orden 
     public void mostrar();

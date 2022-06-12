@@ -58,10 +58,15 @@ public class TRABAJARCONOBLIGATORIO {
         "Insertar Linea: Posicion de linea demasiado alta");
         p.ver(obl.insertarLineaEnPosicion(99, 1, 1).resultado, Retorno.Resultado.ERROR,
         "Insertar Linea: Contacto inexistente");
+        p.ver(obl.insertarLineaEnPosicion(2, 99, 1).resultado, Retorno.Resultado.ERROR,
+        "Insertar Linea: Mensaje inexistente");
         p.ver(obl.insertarLineaEnPosicion(2, 1, 1).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al principio");
         p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al final");
+        
+        p.ver(obl.borrarTodo(2, 1).resultado, Retorno.Resultado.OK,
+        "Borrar todo");
 
  
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 

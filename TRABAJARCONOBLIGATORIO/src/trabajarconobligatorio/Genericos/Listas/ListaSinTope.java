@@ -2,6 +2,7 @@ package trabajarconobligatorio.Genericos.Listas;
 
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Interfaces.Listas.ILista;
+import trabajarconobligatorio.Modelos.Linea;
 
 public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     private Nodo<T> inicio;
@@ -105,6 +106,19 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
     }
 
     @Override
+    public void vaciarRecursivo(Nodo<T> ultimo) {
+        if (ultimo == null){
+            inicio = null;
+            fin = null;
+            return;
+        }
+        Nodo<T> aux = ultimo.getAnterior();
+        ultimo.setSiguiente(null);
+        ultimo.setAnterior(null);
+        vaciarRecursivo(aux);
+    }
+
+    @Override
     public void borrarElemento(T n) {
         if (!this.esVacia()) {
             if (inicio.getDato().equals(n)) {
@@ -175,6 +189,10 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
 
     public Nodo<T> getInicio() {
         return inicio;
+    }
+    
+    public Nodo<T> getFin() {
+        return fin;
     }
 
     public Nodo<T> NodoMedio(Nodo<T> inicio, Nodo<T> fin)

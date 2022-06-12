@@ -91,5 +91,13 @@ public class Sistema {
         return false;
     }
 
+    public boolean borrarTodo(int numContactoOrigen, int numMensaje) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.borrarTodo(numMensaje);
+        }
+        return false;
+    }
+
     
 }

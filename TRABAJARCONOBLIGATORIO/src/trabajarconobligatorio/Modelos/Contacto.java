@@ -97,6 +97,15 @@ public class Contacto implements Comparable<Contacto> {
     }
 
 
+    public boolean borrarTodo(int numMensaje) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            mensaje.Lineas.vaciarRecursivo(mensaje.Lineas.getFin());
+            return true;
+        }
+        return false;    
+    }
 
 
     // public boolean equals(Object o) {
@@ -127,4 +136,5 @@ public class Contacto implements Comparable<Contacto> {
     public String toString() {
         return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
+
 }
