@@ -41,6 +41,10 @@ public interface ILista<T extends Comparable<T>> {
     //post: inserta el elemento en la posición indicada desplazando a los que le siguen.
     public boolean agregarEnPosicion(T n, int pos);
 
+    //pre: pos es un entero
+    //post: se elimina la elemento de posicion dada en la lista
+    public boolean borrarEnPosicion(int pos);
+
     //pre: n es un entero
     //post: se elimina la primera ocurrencia de n en la lista
     public void borrarElemento(T n);

@@ -82,6 +82,19 @@ public class Sistema {
         return null;
     }
 
+    public boolean insertarLinea(int numContactoOrigen, int numMensaje) {
+        boolean lineaInsertada = false;
+        Contacto contacto = getContactoPorNumero(numContactoOrigen);
+        if (contacto != null) {
+            Mensaje mensaje = contacto.getMensajePorId(numMensaje);
+            if (mensaje != null) {
+                mensaje.insertarLineaFinal();
+                lineaInsertada = true;
+            }
+        }
+        return lineaInsertada;
+    }
+
     public boolean insertarLineaEnPosicion(int numContactoOrigen, int numMensaje, int posicionLinea) {
         Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
         if(contactoOrigen != null ){
@@ -96,6 +109,20 @@ public class Sistema {
         if(contactoOrigen != null ){
             return contactoOrigen.borrarTodo(numMensaje);
         }
+        return false;
+    }
+
+    public boolean borrarLinea(int numContactoOrigen, int numMensaje, int posicionLinea){
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            if(contactoOrigen.encontrarMensaje(numMensaje)){
+                return contactoOrigen.borrarLineaEnPosicion(numMensaje,posicionLinea);
+            }else{
+                //mensaje no existe
+                return false;
+            }
+        }
+        //contacto no existe
         return false;
     }
 

@@ -65,9 +65,23 @@ public class TRABAJARCONOBLIGATORIO {
         p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al final");
         
+        p.ver(obl.insertarLineaEnPosicion(2, 1, 3).resultado, Retorno.Resultado.OK,
+        "Insertar Linea: Insertar al final");
+        p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
+        "Insertar Linea: Insertar al final");
+        
+        p.ver(obl.borrarLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
+        "Borrar Linea: Contacto no existe");
+        p.ver(obl.borrarLinea(2, 99, 2).resultado, Retorno.Resultado.ERROR, 
+        "Borrar Linea: Mensaje no existe");
+        p.ver(obl.borrarLinea(2, 1, 2).resultado, Retorno.Resultado.OK, 
+        "Borrar Linea: Se borra linea de posicion 2");
+        p.ver(obl.borrarLinea(2, 1, 1).resultado, Retorno.Resultado.OK, 
+        "Borrar Linea: Se borra linea del inicio");
+
+
         p.ver(obl.borrarTodo(2, 1).resultado, Retorno.Resultado.OK,
         "Borrar todo");
-
  
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 
                 " sistema eliminado");

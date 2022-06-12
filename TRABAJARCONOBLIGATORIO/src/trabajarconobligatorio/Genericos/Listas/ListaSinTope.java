@@ -15,8 +15,9 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         fin = null;
         cantidad = 0;
     }
+
     @Override
-    public int getCantidadElementos(){
+    public int getCantidadElementos() {
         return cantidad;
     }
 
@@ -33,10 +34,10 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
             fin = inicio;
             cantidad++;
         } else {
-                nuevo.setSiguiente(getInicio());
-                inicio.setAnterior(nuevo);
-                inicio = nuevo;
-                cantidad++;
+            nuevo.setSiguiente(getInicio());
+            inicio.setAnterior(nuevo);
+            inicio = nuevo;
+            cantidad++;
         }
     }
 
@@ -195,19 +196,16 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         return fin;
     }
 
-    public Nodo<T> NodoMedio(Nodo<T> inicio, Nodo<T> fin)
-    {
+    public Nodo<T> NodoMedio(Nodo<T> inicio, Nodo<T> fin) {
         if (inicio == null)
             return null;
- 
-            Nodo<T> lento = inicio;
-            Nodo<T> rapido = inicio;
- 
-        while (rapido != fin)
-        {
+
+        Nodo<T> lento = inicio;
+        Nodo<T> rapido = inicio;
+
+        while (rapido != fin) {
             rapido = rapido.getSiguiente();
-            if (rapido != fin)
-            {
+            if (rapido != fin) {
                 lento = lento.getSiguiente();
                 rapido = rapido.getSiguiente();
             }
@@ -215,52 +213,64 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         return lento;
     }
 
-    public Nodo<T> busquedaBinaria(Nodo<T> head, T obj)
-    {
+    public Nodo<T> busquedaBinaria(Nodo<T> head, T obj) {
         Nodo<T> inicio = head;
         Nodo<T> fin = null;
- 
-        do
-        {
+
+        do {
             Nodo<T> medio = NodoMedio(inicio, fin);
- 
-            if (medio == null){
+
+            if (medio == null) {
                 return null;
             }
- 
+
             if (medio.getDato().equals(obj)) {
-                    return medio;
-            }
-            else if (medio.getDato().compareTo(obj) == -1)
-            {
+                return medio;
+            } else if (medio.getDato().compareTo(obj) == -1) {
                 inicio = medio.getSiguiente();
             } else {
                 fin = medio;
             }
         } while (fin == null || fin != inicio);
- 
+
         return null;
     }
+  
+    public void insertarFinalRecursivo(Nodo<T> inicio, T objeto) {
+        Nodo<T> nuevoNodo = new Nodo<T>(objeto);
+        if (inicio == null) {
+            inicio = nuevoNodo;
+            fin = nuevoNodo;
+            return;
+        }
+        if (inicio.getSiguiente() == null) {
+            inicio.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(inicio);
+            this.cantidad++;
+            return;
+        }
+        insertarFinalRecursivo(inicio.getSiguiente(), objeto); 
+    }
+  
+
     @Override
     public boolean agregarEnPosicion(T n, int pos) {
-        if(pos >= 1 && pos <= cantidad + 1) {
+        if (pos >= 1 && pos <= cantidad + 1) {
 
             Nodo<T> nuevo = new Nodo<T>(n);
 
-            if(pos == 1){
-                if(inicio != null){
+            if (pos == 1) {
+                if (inicio != null) {
                     nuevo.setSiguiente(inicio);
                     inicio.setAnterior(nuevo);
                 }
                 inicio = nuevo;
                 fin = nuevo;
-            }
-            else if (pos == cantidad + 1) {
+            } else if (pos == cantidad + 1) {
                 nuevo.setAnterior(fin);
                 fin.setSiguiente(nuevo);
                 fin = nuevo;
-            }
-            else {
+            } else {
                 Nodo<T> desplazado = obtenerElementoPosRecursivo(pos, inicio, 1);
                 Nodo<T> anterior = desplazado.getAnterior();
                 anterior.setSiguiente(nuevo);
@@ -273,11 +283,41 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         }
         return false;
     }
+
+    @Override
+    public boolean borrarEnPosicion(int pos) {
+        if (pos >= 1 && pos <= cantidad) {
+            if (pos == 1) {
+                if (inicio != null) {
+                    inicio.setAnterior(null);
+                    inicio = getInicio().getSiguiente();
+                }
+            } else if (pos == cantidad) {
+                Nodo<T> borrarFin = fin;
+                fin = borrarFin.getAnterior();
+                fin.setSiguiente(null);
+                borrarFin.setAnterior(null);
+            } else {
+                Nodo<T> aux = obtenerElementoPosRecursivo(pos, inicio, 1);
+                Nodo<T> anterior = aux.getAnterior();
+                Nodo<T> siguiente = aux.getSiguiente();
+                anterior.setSiguiente(aux.getSiguiente());
+                siguiente.setAnterior(aux.getAnterior());
+                aux.setSiguiente(null);
+                aux.setAnterior(null);
+            }
+            cantidad--;
+            return true;
+        }
+        return false;
+    }
+
+
     @Override
     public Nodo<T> obtenerElementoPosRecursivo(int pos, Nodo<T> inicio, int contador) {
-        if(pos == contador){
-            return inicio.getSiguiente();
+        if (pos == contador) {
+            return inicio;
         }
-        return obtenerElementoPosRecursivo(pos, inicio.getSiguiente(), contador+1);
+        return obtenerElementoPosRecursivo(pos, inicio.getSiguiente(), contador + 1);
     }
 }

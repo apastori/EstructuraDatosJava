@@ -77,6 +77,15 @@ public class Contacto implements Comparable<Contacto> {
         mensajeAEliminar.setSiguiente(null);
         return true;
     }
+    
+    public Mensaje getMensajePorId(int numMensaje) {
+        Mensaje mensaje = null;
+        Nodo<Mensaje> nodoMensaje = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if (nodoMensaje != null) {
+            mensaje = nodoMensaje.getDato();
+        }
+        return mensaje;
+    }
 
     public Mensaje getMensajePorNumero(int numMensaje) {
         Nodo<Mensaje> mensaje = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
@@ -96,6 +105,14 @@ public class Contacto implements Comparable<Contacto> {
         return false;
     }
 
+    public boolean encontrarMensaje(int numMensaje) {
+        Nodo<Mensaje> mensajeBuscado = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if (mensajeBuscado == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public boolean borrarTodo(int numMensaje) {
         Mensaje mensaje = getMensajePorNumero(numMensaje);
@@ -105,6 +122,15 @@ public class Contacto implements Comparable<Contacto> {
             return true;
         }
         return false;    
+    }
+    
+    public boolean borrarLineaEnPosicion(int numMensaje, int posicionLinea){
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+        if(mensaje != null){
+            return mensaje.borrarLineaEnPosicion(posicionLinea);
+        }else{
+            return false;
+        }
     }
 
 

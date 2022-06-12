@@ -88,7 +88,10 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno insertarLinea(int numContactoOrigen, int numMensaje) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if(Sistema.insertarLinea(numContactoOrigen, numMensaje)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 
@@ -105,7 +108,10 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno borrarLinea(int numContactoOrigen, int numMensaje, int posicionLinea) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if (Sistema.borrarLinea(numContactoOrigen, numMensaje, posicionLinea)) {
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 
