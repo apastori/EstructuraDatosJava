@@ -143,5 +143,18 @@ public class Sistema {
         return false;
     }
 
+    public boolean borrarPalabra(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra){
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            if(contactoOrigen.encontrarMensaje(numMensaje)){
+                return contactoOrigen.borrarPalabraEnPosicion(numMensaje,posicionLinea,posicionPalabra);
+            }else{
+                //mensaje no existe
+                return false;
+            }
+        }
+        //contacto no existe
+        return false;
+    }
     
 }

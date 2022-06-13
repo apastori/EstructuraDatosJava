@@ -133,6 +133,14 @@ public class Contacto implements Comparable<Contacto> {
         }
     }
 
+    public boolean borrarPalabraEnPosicion(int numMensaje, int posicionLinea, int posicionPalabra){
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+        if(mensaje != null){
+            return mensaje.borrarPalabraEnPosicion(posicionLinea,posicionPalabra);
+        }else{
+            return false;
+        }
+    }
 
     // public boolean equals(Object o) {
     // return this.getNombre().equalsIgnoreCase(((Contacto) o).getNombre());
