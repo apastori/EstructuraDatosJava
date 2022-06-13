@@ -156,9 +156,12 @@ public class Obligatorio implements IObligatorio {
     }
 
     @Override
-    public Retorno borrarPalabra(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        return ret;
+    public Retorno borrarPalabra(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra) {        
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if (Sistema.borrarPalabra(numContactoOrigen, numMensaje, posicionLinea, posicionPalabra)) {
+            ret.resultado = Retorno.Resultado.OK;
+        }
+        return ret;        
     }
 
     @Override

@@ -142,4 +142,10 @@ public class Mensaje implements Comparable<Mensaje> {
         }
         return true;
     }
+
+    public boolean borrarPalabraEnPosicion(int posicionLinea, int posicionPalabra) {  
+        Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+        ListaConTope<String> Palabras = nLineaActual.getDato().Palabras();           
+        return Palabras.borrarEnPosicion(posicionPalabra);
+    }
 }
