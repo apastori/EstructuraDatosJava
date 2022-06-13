@@ -117,7 +117,7 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno borrarTodo(int numContactoOrigen, int numMensaje) {
-        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
         
         if(Sistema.borrarTodo(numContactoOrigen, numMensaje)){
             ret.resultado = Retorno.Resultado.OK;
@@ -135,15 +135,24 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra,
             String palabraAIngresar) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if(Sistema.insertarPalabraEnLinea(numContactoOrigen, numMensaje, posicionLinea, posicionPalabra, palabraAIngresar)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 
     @Override
     public Retorno insertarPalabraYDesplazar(int numContactoOrigen, int numMensaje, int posicionLinea,
             int posicionPalabra, String palabraAIngresar) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        return ret;
+            
+            Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+
+            if(Sistema.insertarPalabraYDesplazar(numContactoOrigen, numMensaje, posicionLinea, posicionPalabra, palabraAIngresar)){
+                ret.resultado = Retorno.Resultado.OK;
+            }
+
+            return ret;
     }
 
     @Override

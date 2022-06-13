@@ -1,17 +1,20 @@
 package trabajarconobligatorio.Modelos;
 
 import trabajarconobligatorio.Genericos.Nodo;
+import trabajarconobligatorio.Genericos.Listas.ListaConTope;
 import trabajarconobligatorio.Genericos.Pila.Pila;
 
 public class Linea implements Comparable<Linea> {
-    private Pila<String> Palabras;
+    private ListaConTope<String> Palabras;
 
 
     public Linea(int cantidadMaxima) {
-        Palabras = new Pila<String>(cantidadMaxima);
-
+        Palabras = new ListaConTope<String>(cantidadMaxima);
     }
 
+    public ListaConTope<String> Palabras(){
+        return Palabras;
+    }
     public String imprimirLinea() {
         String textoLinea = "";
         if (!this.Palabras.esVacia()) {

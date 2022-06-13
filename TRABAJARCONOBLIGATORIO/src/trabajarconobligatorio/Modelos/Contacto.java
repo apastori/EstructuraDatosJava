@@ -163,4 +163,18 @@ public class Contacto implements Comparable<Contacto> {
         return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
 
+    public boolean insertarPalabraYDesplazar(int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            return mensaje.insertarPalabraYDesplazar(posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false; 
+    }
+
+    public boolean insertarPalabraEnLinea(int numMensaje, int posicionLinea, int posicionPalabra,
+            String palabraAIngresar) {
+        return false;
+    }
+
 }

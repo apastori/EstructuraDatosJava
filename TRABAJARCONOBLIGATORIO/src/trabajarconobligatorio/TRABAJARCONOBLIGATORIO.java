@@ -81,7 +81,13 @@ public class TRABAJARCONOBLIGATORIO {
 
 
         p.ver(obl.borrarTodo(2, 1).resultado, Retorno.Resultado.OK,
-        "Borrar todo");
+        "Borrar todo: Ok");
+        
+        p.ver(obl.borrarTodo(1, 1).resultado, Retorno.Resultado.ERROR,
+        "Borrar todo: Contacto inexistente");
+        
+        p.ver(obl.borrarTodo(2, 99).resultado, Retorno.Resultado.ERROR,
+        "Borrar todo: Mensaje inexistente");
  
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 
                 " sistema eliminado");

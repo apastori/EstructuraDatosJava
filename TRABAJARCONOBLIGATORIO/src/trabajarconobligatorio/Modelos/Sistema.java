@@ -126,5 +126,19 @@ public class Sistema {
         return false;
     }
 
+    public boolean insertarPalabraYDesplazar(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.insertarPalabraYDesplazar(numMensaje, posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false;
+    }
+
+    public boolean insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra,
+            String palabraAIngresar) {
+        return false;
+    }
+
     
 }

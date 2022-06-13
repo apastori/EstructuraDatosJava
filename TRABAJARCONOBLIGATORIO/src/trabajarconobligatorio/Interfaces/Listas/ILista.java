@@ -4,6 +4,10 @@ import trabajarconobligatorio.Genericos.Nodo;
 
 public interface ILista<T extends Comparable<T>> {
 
+
+    public Nodo<T> getInicio();
+    public Nodo<T> getFin();
+
     public int getCantidadElementos();
     //metodos de la interfaz
     //post: Retorna un boolean indicado si la lista es vacía

@@ -2,16 +2,15 @@ package trabajarconobligatorio.Genericos.Listas;
 
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Interfaces.Listas.ILista;
-import trabajarconobligatorio.Modelos.Linea;
 
-public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
-    private Nodo<T> inicio;
-    private Nodo<T> fin;
-    private int cantidad;
-
+public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
+    protected Nodo<T> inicio;
+    protected Nodo<T> fin;
+    protected int cantidad;
+    
     // Constructor
     public ListaSinTope() {
-        inicio = null;
+        this.inicio = null;
         fin = null;
         cantidad = 0;
     }
@@ -188,10 +187,11 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
         }
     }
 
+    @Override
     public Nodo<T> getInicio() {
         return inicio;
     }
-    
+    @Override
     public Nodo<T> getFin() {
         return fin;
     }
@@ -319,5 +319,22 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T> {
             return inicio;
         }
         return obtenerElementoPosRecursivo(pos, inicio.getSiguiente(), contador + 1);
+    }
+
+    public Nodo<T> getNodoPorPos(int pos) {
+        Nodo<T> nodo = null;
+        if (pos >= 1 && pos <= cantidad) {
+            if (pos == 1) {
+                if (inicio != null) {
+                    nodo = inicio;
+                }
+            } else if (pos == cantidad) {
+                nodo = fin;
+            } else {
+                nodo = obtenerElementoPosRecursivo(pos, inicio.getSiguiente(), 2);
+            }
+        }
+
+        return nodo;
     }
 }
