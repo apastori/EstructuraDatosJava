@@ -1,6 +1,5 @@
 package trabajarconobligatorio.Genericos.Listas;
 
-import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Interfaces.Listas.ILista;
 
 public class ListaConTope<T extends Comparable<T>> extends ListaSinTope<T> implements ILista<T> {
@@ -43,6 +42,16 @@ public class ListaConTope<T extends Comparable<T>> extends ListaSinTope<T> imple
         }else {
             System.out.println("Esta Llena");
         } 
+    }
+
+    @Override
+    public boolean agregarEnPosicion(T n, int pos){
+        if (!esLlena()) {
+            return super.agregarEnPosicion(n, pos);
+        }
+        
+        System.out.println("Esta Llena");
+        return false;
     }
 
     public void insertarYDesplazar(int posicionPalabra, T palabraAIngresar) {

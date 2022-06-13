@@ -11,7 +11,7 @@ public class Sistema {
 
     public Sistema(int MAX_CANT_PALABRAS_X_LINEA) {
         listaContactos = new ListaSinTope<Contacto>();
-        this.MAX_CANT_PALABRAS_X_LINEA = Integer.MAX_VALUE;
+        this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
     }
 
     public void destruir() {
@@ -135,8 +135,11 @@ public class Sistema {
         return false;
     }
 
-    public boolean insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra,
-            String palabraAIngresar) {
+    public boolean insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.insertarPalabraEnLinea(numMensaje, posicionLinea, posicionPalabra, palabraAIngresar);
+        }
         return false;
     }
 

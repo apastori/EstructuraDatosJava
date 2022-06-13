@@ -69,6 +69,51 @@ public class TRABAJARCONOBLIGATORIO {
         "Insertar Linea: Insertar al final");
         p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al final");
+
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "Hola").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 2, "Mundo").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al final");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "PC SAYS:").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al principio");
+        
+        p.ver(obl.insertarPalabraEnLinea(99, 1, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR contacto no existe ");
+        p.ver(obl.insertarPalabraEnLinea(2, 99, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR mensaje no existe");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 2, 2, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR posición palabra incorrecta");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR Linea llena");
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+
+
+        p.ver(obl.insertarPalabraYDesplazar(99, 1, 1, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR contacto no existe ");
+        p.ver(obl.insertarPalabraYDesplazar(2, 99, 1, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR mensaje no existe");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 2, 2, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR posición palabra incorrecta");
+        
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 1").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 2").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 3").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 3, "DESP 4").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al final");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 5").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 6").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 7").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+  
         
         p.ver(obl.borrarLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
         "Borrar Linea: Contacto no existe");
@@ -88,10 +133,11 @@ public class TRABAJARCONOBLIGATORIO {
         
         p.ver(obl.borrarTodo(2, 99).resultado, Retorno.Resultado.ERROR,
         "Borrar todo: Mensaje inexistente");
- 
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 
                 " sistema eliminado");
+        
                 
+   
         p.imprimirResultadosPrueba();
     }
 }

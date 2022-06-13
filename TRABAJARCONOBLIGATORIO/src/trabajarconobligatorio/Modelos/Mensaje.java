@@ -48,7 +48,7 @@ public class Mensaje implements Comparable<Mensaje> {
             Nodo<Linea> lineaActual = this.Lineas.getInicio();
             int contador = 1;
             while (lineaActual.getSiguiente() != null) {
-                textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea();
+                textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea() + "\n";
                 lineaActual = lineaActual.getSiguiente();
                 contador++;
             }
@@ -106,7 +106,13 @@ public class Mensaje implements Comparable<Mensaje> {
     }
 
     public boolean insertarPalabraEnLinea(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+        
+        if(nLineaActual != null ) {
+            return nLineaActual.getDato().insertarPalabra(posicionPalabra, palabraAIngresar);
+        }
         return false;
+
     }
 
     public boolean insertarPalabraYDesplazar(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
@@ -125,8 +131,8 @@ public class Mensaje implements Comparable<Mensaje> {
         String aux = null;
         if(Palabras.esLlena()){
             aux = Palabras.getFin().getDato();
-            Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar);
         }
+        Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar);
         if( nLineaSiguiente == null){
             insertarLineaFinal();
         }

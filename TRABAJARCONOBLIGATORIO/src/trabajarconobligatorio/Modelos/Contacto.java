@@ -172,9 +172,13 @@ public class Contacto implements Comparable<Contacto> {
         return false; 
     }
 
-    public boolean insertarPalabraEnLinea(int numMensaje, int posicionLinea, int posicionPalabra,
-            String palabraAIngresar) {
-        return false;
+    public boolean insertarPalabraEnLinea(int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            return mensaje.insertarPalabraEnLinea(posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false; 
     }
 
 }
