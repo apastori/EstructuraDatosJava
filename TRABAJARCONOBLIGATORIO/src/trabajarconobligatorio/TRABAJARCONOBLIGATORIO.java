@@ -115,13 +115,13 @@ public class TRABAJARCONOBLIGATORIO {
         "mostrar mensaje contacto 2 a contacto 1"); 
 
         p.ver(obl.borrarPalabra(2, 1, 1, 1).resultado, Retorno.Resultado.OK, 
-        "Borrar palabra: Se borra palabra de posicion 1");  
+        "Borrar palabra: Se borra palabra de posicion 1 de linea 1");  
         p.ver(obl.borrarPalabra(2, 1, 3, 2).resultado, Retorno.Resultado.OK, 
-        "Borrar palabra: Se borra palabra de posicion 1");
+        "Borrar palabra: Se borra palabra de posicion 1 de linea 3");
         p.ver(obl.borrarPalabra(2, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
-        "Borrar palabra: Se borra palabra de posicion 1");
-        p.ver(obl.borrarPalabra(2, 1, 1, 2).resultado, Retorno.Resultado.ERROR, 
-        "Borrar palabra: Error al borrar palabra de posicion 2");
+        "Borrar palabra: Error al borrar palabra de posicion 1 de linea 5");
+        p.ver(obl.borrarPalabra(2, 1, 1, 3).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra de posicion 3 de linea 1");
 
         p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
         "mostrar mensaje contacto 2 a contacto 1"); 
