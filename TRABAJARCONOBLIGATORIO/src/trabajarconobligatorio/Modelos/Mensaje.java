@@ -51,15 +51,25 @@ public class Mensaje implements Comparable<Mensaje> {
                 textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea() + "\n";
                 lineaActual = lineaActual.getSiguiente();
                 contador++;
-            }
-            
+            }            
         } else {
             textoMensaje = "Mensaje Vacio";
         }
         return textoMensaje;
+    }
 
-
-
+    public String getTextoLinea(int posicionLinea){
+        String textoLinea = "";
+        if (!this.Lineas.esVacia()){
+            Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+            if(nLineaActual!=null){
+                textoLinea += posicionLinea+": "+nLineaActual.getDato().imprimirLinea() + "\n";
+            }
+        }
+        else {
+            textoLinea = "Linea Vacia";
+        }
+        return textoLinea;
     }
       
     public void insertarLineaFinal() {
@@ -67,7 +77,6 @@ public class Mensaje implements Comparable<Mensaje> {
         this.Lineas.insertarFinalRecursivo(this.Lineas.getInicio(), nuevaLinea);
     }
       
-
     @Override
     public int compareTo(Mensaje o) {
         return Integer.compare(id, o.id);

@@ -118,6 +118,10 @@ public class TRABAJARCONOBLIGATORIO {
         "Borrar palabra: Se borra palabra de posicion 1 de linea 1");  
         p.ver(obl.borrarPalabra(2, 1, 3, 2).resultado, Retorno.Resultado.OK, 
         "Borrar palabra: Se borra palabra de posicion 1 de linea 3");
+        p.ver(obl.borrarPalabra(99, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra no se enceuntra contacto 99");
+        p.ver(obl.borrarPalabra(2, 99, 5, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra no se enceuntra mensaje 99");
         p.ver(obl.borrarPalabra(2, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
         "Borrar palabra: Error al borrar palabra de posicion 1 de linea 5");
         p.ver(obl.borrarPalabra(2, 1, 1, 3).resultado, Retorno.Resultado.ERROR, 
@@ -125,6 +129,18 @@ public class TRABAJARCONOBLIGATORIO {
 
         p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
         "mostrar mensaje contacto 2 a contacto 1"); 
+
+        p.ver(obl.imprimirLinea(2, 1, 1).resultado, Retorno.Resultado.OK, 
+        "Imprimir Linea: Se imprime linea de posicion 1");
+        p.ver(obl.imprimirLinea(2, 1, 2).resultado, Retorno.Resultado.OK, 
+        "Imprimir Linea: Se imprime linea de posicion 2");        
+        p.ver(obl.imprimirLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe contacto 99");
+        p.ver(obl.imprimirLinea(2, 99, 2).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe mensaje 99");
+        //TODO : ver caso de linea que no existe
+        p.ver(obl.imprimirLinea(2, 1, 99).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe linea 99");
         
         p.ver(obl.borrarLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
         "Borrar Linea: Contacto no existe");
