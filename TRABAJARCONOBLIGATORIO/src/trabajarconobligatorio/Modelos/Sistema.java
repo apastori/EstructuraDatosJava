@@ -157,4 +157,15 @@ public class Sistema {
         return false;
     }
     
+    public boolean imprimirLinea(int numContactoOrigen, int numMensaje, int posicionLinea) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            Mensaje mensaje =contactoOrigen.getMensajePorNumero(numMensaje);
+            if(mensaje != null ){
+                System.out.println(mensaje.getTextoLinea(posicionLinea));
+                return true;
+            }
+        }
+        return false;
+    }
 }
