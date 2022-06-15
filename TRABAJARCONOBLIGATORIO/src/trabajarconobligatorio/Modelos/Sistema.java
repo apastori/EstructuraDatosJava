@@ -11,7 +11,7 @@ public class Sistema {
 
     public Sistema(int MAX_CANT_PALABRAS_X_LINEA) {
         listaContactos = new ListaSinTope<Contacto>();
-        this.MAX_CANT_PALABRAS_X_LINEA = Integer.MAX_VALUE;
+        this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
     }
 
     public void destruir() {
@@ -129,5 +129,72 @@ public class Sistema {
         }
         return borrarOcurrenciasPalabraLinea;
     }
+
+    public boolean borrarTodo(int numContactoOrigen, int numMensaje) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.borrarTodo(numMensaje);
+        }
+        return false;
+    }
+
+    public boolean borrarLinea(int numContactoOrigen, int numMensaje, int posicionLinea){
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            if(contactoOrigen.encontrarMensaje(numMensaje)){
+                return contactoOrigen.borrarLineaEnPosicion(numMensaje,posicionLinea);
+            }else{
+                //mensaje no existe
+                return false;
+            }
+        }
+        //contacto no existe
+        return false;
+    }
+
+    public boolean insertarPalabraYDesplazar(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.insertarPalabraYDesplazar(numMensaje, posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false;
+    }
+
+    public boolean insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            return contactoOrigen.insertarPalabraEnLinea(numMensaje, posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false;
+    }
+
+    public boolean borrarPalabra(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra){
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            if(contactoOrigen.encontrarMensaje(numMensaje)){
+                return contactoOrigen.borrarPalabraEnPosicion(numMensaje,posicionLinea,posicionPalabra);
+            }else{
+                //mensaje no existe
+                return false;
+            }
+        }
+        //contacto no existe
+        return false;
+    }
     
+    public boolean imprimirLinea(int numContactoOrigen, int numMensaje, int posicionLinea) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null ){
+            Mensaje mensaje =contactoOrigen.getMensajePorNumero(numMensaje);
+            if(mensaje != null ){
+                String texto =mensaje.getTextoLinea(posicionLinea);
+                if(texto != null) { // Si el texto es Null, la línea no existe.
+                    System.out.println(texto);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

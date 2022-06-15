@@ -58,15 +58,120 @@ public class TRABAJARCONOBLIGATORIO {
         "Insertar Linea: Posicion de linea demasiado alta");
         p.ver(obl.insertarLineaEnPosicion(99, 1, 1).resultado, Retorno.Resultado.ERROR,
         "Insertar Linea: Contacto inexistente");
+        p.ver(obl.insertarLineaEnPosicion(2, 99, 1).resultado, Retorno.Resultado.ERROR,
+        "Insertar Linea: Mensaje inexistente");
         p.ver(obl.insertarLineaEnPosicion(2, 1, 1).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al principio");
         p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
         "Insertar Linea: Insertar al final");
+        
+        p.ver(obl.insertarLineaEnPosicion(2, 1, 3).resultado, Retorno.Resultado.OK,
+        "Insertar Linea: Insertar al final");
+        p.ver(obl.insertarLineaEnPosicion(2, 1, 2).resultado, Retorno.Resultado.OK,
+        "Insertar Linea: Insertar al final");
 
- 
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "Hola").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 2, "Mundo").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al final");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "PC SAYS:").resultado, Retorno.Resultado.OK,
+        "Insertar Palabra: Insertar al principio");
+        
+        p.ver(obl.insertarPalabraEnLinea(99, 1, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR contacto no existe ");
+        p.ver(obl.insertarPalabraEnLinea(2, 99, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR mensaje no existe");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 2, 2, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR posición palabra incorrecta");
+        p.ver(obl.insertarPalabraEnLinea(2, 1, 1, 1, "ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar Palabra: ERROR Linea llena");
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+
+
+        p.ver(obl.insertarPalabraYDesplazar(99, 1, 1, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR contacto no existe ");
+        p.ver(obl.insertarPalabraYDesplazar(2, 99, 1, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR mensaje no existe");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 2, 2, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR posición palabra incorrecta");
+        
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 1").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 2").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 3").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 3, "DESP 4").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al final");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 5").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 6").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 7").resultado, Retorno.Resultado.OK,
+        "Insertar y desplazar Palabra: Insertar al principio");
+        // Pruebas para Funcionalidad 3.6
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(100, 1, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el contacto 100 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(2, 500, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el mensaje 500 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(2, 1, "DESP 5").resultado, Retorno.Resultado.OK,
+        "Borrar Palabra DESP 5");
+        
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+
+        p.ver(obl.borrarPalabra(2, 1, 1, 1).resultado, Retorno.Resultado.OK, 
+        "Borrar palabra: Se borra palabra de posicion 1 de linea 1");  
+        p.ver(obl.borrarPalabra(2, 1, 3, 2).resultado, Retorno.Resultado.OK, 
+        "Borrar palabra: Se borra palabra de posicion 1 de linea 3");
+        p.ver(obl.borrarPalabra(99, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra no se enceuntra contacto 99");
+        p.ver(obl.borrarPalabra(2, 99, 5, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra no se enceuntra mensaje 99");
+        p.ver(obl.borrarPalabra(2, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra de posicion 1 de linea 5");
+        p.ver(obl.borrarPalabra(2, 1, 1, 3).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra de posicion 3 de linea 1");
+
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+
+        p.ver(obl.imprimirLinea(2, 1, 1).resultado, Retorno.Resultado.OK, 
+        "Imprimir Linea: Se imprime linea de posicion 1");
+        p.ver(obl.imprimirLinea(2, 1, 2).resultado, Retorno.Resultado.OK, 
+        "Imprimir Linea: Se imprime linea de posicion 2");        
+        p.ver(obl.imprimirLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe contacto 99");
+        p.ver(obl.imprimirLinea(2, 99, 2).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe mensaje 99");
+        //TODO : ver caso de linea que no existe
+        p.ver(obl.imprimirLinea(2, 1, 99).resultado, Retorno.Resultado.ERROR, 
+        "Imprimir Linea: Error al imprimir linea, no existe linea 99");
+        
+        p.ver(obl.borrarLinea(99, 1, 2).resultado, Retorno.Resultado.ERROR, 
+        "Borrar Linea: Contacto no existe");
+        p.ver(obl.borrarLinea(2, 99, 2).resultado, Retorno.Resultado.ERROR, 
+        "Borrar Linea: Mensaje no existe");
+        p.ver(obl.borrarLinea(2, 1, 2).resultado, Retorno.Resultado.OK, 
+        "Borrar Linea: Se borra linea de posicion 2");
+        p.ver(obl.borrarLinea(2, 1, 1).resultado, Retorno.Resultado.OK, 
+        "Borrar Linea: Se borra linea del inicio");
+
+
+        p.ver(obl.borrarTodo(2, 1).resultado, Retorno.Resultado.OK,
+        "Borrar todo: Ok");
+        
+        p.ver(obl.borrarTodo(1, 1).resultado, Retorno.Resultado.ERROR,
+        "Borrar todo: Contacto inexistente");
+        
+        p.ver(obl.borrarTodo(2, 99).resultado, Retorno.Resultado.ERROR,
+        "Borrar todo: Mensaje inexistente");
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 
                 " sistema eliminado");
+        
                 
+   
         p.imprimirResultadosPrueba();
     }
 }

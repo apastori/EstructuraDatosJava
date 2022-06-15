@@ -1,33 +1,39 @@
 package trabajarconobligatorio.Modelos;
 
 import trabajarconobligatorio.Genericos.Nodo;
-import trabajarconobligatorio.Genericos.Pila.Pila;
+import trabajarconobligatorio.Genericos.Listas.ListaConTope;
 
 public class Linea implements Comparable<Linea> {
-    private Pila<String> Palabras;
+    private ListaConTope<String> Palabras;
 
 
     public Linea(int cantidadMaxima) {
-        Palabras = new Pila<String>(cantidadMaxima);
-
+        Palabras = new ListaConTope<String>(cantidadMaxima);
     }
 
+    public ListaConTope<String> Palabras(){
+        return Palabras;
+    }
     public String imprimirLinea() {
         String textoLinea = "";
         if (!this.Palabras.esVacia()) {
-            int contador = 1;
             Nodo<String> actual = Palabras.getInicio();
-            while (actual.getSiguiente() != null) {
-                textoLinea += actual.getDato() + (contador + "  ");
+            do {
+                textoLinea += actual.getDato() + "  ";
                 actual = actual.getSiguiente();
-                contador++;
             }
+            while (actual != null);
+               
         } else {
             textoLinea += "Linea Vacia";
         }
         return textoLinea;
     }
+    
 
+    public boolean insertarPalabra(int posicionPalabra, String palabraAIngresar) {
+        return Palabras.agregarEnPosicion(palabraAIngresar, posicionPalabra);
+    }
     
     @Override
     public int compareTo(Linea o) {
@@ -42,6 +48,18 @@ public class Linea implements Comparable<Linea> {
     void borrarOcurrenciaPalabraRecursivo(Nodo<String> inicio, String palabraABorrar) {
         if (inicio == null) {
             return;
+        }
+        if (inicio.getDato().equals(palabraABorrar)) {
+            Nodo<String> anterior = inicio.getAnterior();
+            Nodo<String> siguiente = inicio.getSiguiente();
+            if (anterior == null) {
+                this.Palabras.borrarInicio();
+            } else if (siguiente == null) {
+                this.Palabras.borrarFin();
+            } else {
+                anterior.setSiguiente(siguiente);
+                siguiente.setAnterior(anterior);
+            }
         }
         borrarOcurrenciaPalabraRecursivo(inicio.getSiguiente(), palabraABorrar);
     }
