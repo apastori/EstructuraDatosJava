@@ -59,11 +59,11 @@ public class Mensaje implements Comparable<Mensaje> {
     }
 
     public String getTextoLinea(int posicionLinea){
-        String textoLinea = "";
+        String textoLinea = null;
         if (!this.Lineas.esVacia()){
             Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
             if(nLineaActual!=null){
-                textoLinea += posicionLinea+": "+nLineaActual.getDato().imprimirLinea() + "\n";
+                textoLinea = posicionLinea+": "+nLineaActual.getDato().imprimirLinea() + "\n";
             }
         }
         else {

@@ -162,8 +162,11 @@ public class Sistema {
         if(contactoOrigen != null ){
             Mensaje mensaje =contactoOrigen.getMensajePorNumero(numMensaje);
             if(mensaje != null ){
-                System.out.println(mensaje.getTextoLinea(posicionLinea));
-                return true;
+                String texto =mensaje.getTextoLinea(posicionLinea);
+                if(texto != null) { // Si el texto es Null, la línea no existe.
+                    System.out.println(texto);
+                    return true;
+                }
             }
         }
         return false;
