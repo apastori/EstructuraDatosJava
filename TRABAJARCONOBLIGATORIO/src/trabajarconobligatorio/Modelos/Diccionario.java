@@ -1,7 +1,7 @@
 package trabajarconobligatorio.Modelos;
 
-import trabajarconobligatorio.Genericos.Listas.ListaCompleta;
+import trabajarconobligatorio.Genericos.Listas.ListaConTope;
 
 public class Diccionario {
-    private ListaCompleta<String> Palabras;
+    private ListaConTope<String> Palabras;
 }

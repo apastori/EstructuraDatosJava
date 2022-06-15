@@ -105,8 +105,42 @@ public class Contacto implements Comparable<Contacto> {
         return false;
     }
 
+    public boolean encontrarMensaje(int numMensaje) {
+        Nodo<Mensaje> mensajeBuscado = Mensajes.busquedaBinaria(Mensajes.getInicio(), new Mensaje(numMensaje));
+        if (mensajeBuscado == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    public boolean borrarTodo(int numMensaje) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
 
+        if(mensaje != null){
+            mensaje.Lineas.vaciarRecursivo(mensaje.Lineas.getFin());
+            return true;
+        }
+        return false;    
+    }
+    
+    public boolean borrarLineaEnPosicion(int numMensaje, int posicionLinea){
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+        if(mensaje != null){
+            return mensaje.borrarLineaEnPosicion(posicionLinea);
+        }else{
+            return false;
+        }
+    }
+
+    public boolean borrarPalabraEnPosicion(int numMensaje, int posicionLinea, int posicionPalabra){
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+        if(mensaje != null){
+            return mensaje.borrarPalabraEnPosicion(posicionLinea,posicionPalabra);
+        }else{
+            return false;
+        }
+    }
 
     // public boolean equals(Object o) {
     // return this.getNombre().equalsIgnoreCase(((Contacto) o).getNombre());
@@ -136,4 +170,23 @@ public class Contacto implements Comparable<Contacto> {
     public String toString() {
         return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
+
+    public boolean insertarPalabraYDesplazar(int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            return mensaje.insertarPalabraYDesplazar(posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false; 
+    }
+
+    public boolean insertarPalabraEnLinea(int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Mensaje mensaje = getMensajePorNumero(numMensaje);
+
+        if(mensaje != null){
+            return mensaje.insertarPalabraEnLinea(posicionLinea, posicionPalabra, palabraAIngresar);
+        }
+        return false; 
+    }
+
 }

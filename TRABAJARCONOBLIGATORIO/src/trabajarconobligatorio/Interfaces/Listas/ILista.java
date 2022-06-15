@@ -4,6 +4,10 @@ import trabajarconobligatorio.Genericos.Nodo;
 
 public interface ILista<T extends Comparable<T>> {
 
+
+    public Nodo<T> getInicio();
+    public Nodo<T> getFin();
+
     public int getCantidadElementos();
     //metodos de la interfaz
     //post: Retorna un boolean indicado si la lista es vacía
@@ -25,6 +29,10 @@ public interface ILista<T extends Comparable<T>> {
 
     //post: se vacia la lista
     public void vaciar();
+    
+    //pre: debe recibir el último nodo de la lista en su primera llamada.
+    //post: se vacia la lista y se desvinculan todos los nodos.
+    public void vaciarRecursivo(Nodo<T> ultimo);
 
     //post: se muestran todos los elementos de la lista en orden 
     public void mostrar();
@@ -36,6 +44,10 @@ public interface ILista<T extends Comparable<T>> {
 
     //post: inserta el elemento en la posición indicada desplazando a los que le siguen.
     public boolean agregarEnPosicion(T n, int pos);
+
+    //pre: pos es un entero
+    //post: se elimina la elemento de posicion dada en la lista
+    public boolean borrarEnPosicion(int pos);
 
     //pre: n es un entero
     //post: se elimina la primera ocurrencia de n en la lista

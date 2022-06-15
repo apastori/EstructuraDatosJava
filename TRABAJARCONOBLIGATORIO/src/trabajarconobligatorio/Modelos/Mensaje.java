@@ -1,6 +1,8 @@
 package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
+
+import trabajarconobligatorio.Genericos.Listas.ListaConTope;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Nodo;
 
@@ -46,15 +48,28 @@ public class Mensaje implements Comparable<Mensaje> {
             Nodo<Linea> lineaActual = this.Lineas.getInicio();
             int contador = 1;
             while (lineaActual.getSiguiente() != null) {
-                textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea();
+                textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea() + "\n";
                 lineaActual = lineaActual.getSiguiente();
                 contador++;
-            }
-            
+            }            
         } else {
             textoMensaje = "Mensaje Vacio";
         }
         return textoMensaje;
+    }
+
+    public String getTextoLinea(int posicionLinea){
+        String textoLinea = null;
+        if (!this.Lineas.esVacia()){
+            Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+            if(nLineaActual!=null){
+                textoLinea = posicionLinea+": "+nLineaActual.getDato().imprimirLinea() + "\n";
+            }
+        }
+        else {
+            textoLinea = "Linea Vacia";
+        }
+        return textoLinea;
     }
       
     public void insertarLineaFinal() {
@@ -93,5 +108,56 @@ public class Mensaje implements Comparable<Mensaje> {
         Linea n = new Linea(MAX_CANT_PALABRAS_X_LINEA);
         return Lineas.agregarEnPosicion(n, posicionLinea);
 
+    }
+
+    public boolean borrarLineaEnPosicion(int posicionLinea) {       
+        return Lineas.borrarEnPosicion(posicionLinea);
+    }
+
+    public boolean insertarPalabraEnLinea(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+        
+        if(nLineaActual != null ) {
+            return nLineaActual.getDato().insertarPalabra(posicionPalabra, palabraAIngresar);
+        }
+        return false;
+
+    }
+
+    public boolean insertarPalabraYDesplazar(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+        Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+        
+        if(nLineaActual == null ) {
+            return false;
+        }
+        return insertarPalabraYDesplazarRecursivo(nLineaActual, posicionPalabra, palabraAIngresar);
+    }
+
+    public boolean insertarPalabraYDesplazarRecursivo(Nodo<Linea> nLinea, int posicionPalabra, String palabraAIngresar) {
+        ListaConTope<String> Palabras = nLinea.getDato().Palabras();
+        Nodo<Linea> nLineaSiguiente = nLinea.getSiguiente();
+
+        String aux = null;
+        if(Palabras.esLlena()){
+            aux = Palabras.getFin().getDato();
+        }
+        Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar);
+        if( nLineaSiguiente == null){
+            insertarLineaFinal();
+        }
+
+        if(aux != null) {
+            return insertarPalabraYDesplazarRecursivo(nLineaSiguiente, 1, aux);
+        }
+        return true;
+    }
+
+    public boolean borrarPalabraEnPosicion(int posicionLinea, int posicionPalabra) {  
+        Nodo<Linea> nLineaActual = Lineas.getNodoPorPos(posicionLinea);
+        if(nLineaActual!=null){
+            ListaConTope<String> Palabras = nLineaActual.getDato().Palabras();           
+            return Palabras.borrarEnPosicion(posicionPalabra);
+        }
+        return false;
     }
 }
