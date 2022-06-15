@@ -54,10 +54,10 @@ public class ListaConTope<T extends Comparable<T>> extends ListaSinTope<T> imple
         return false;
     }
 
-    public void insertarYDesplazar(int posicionPalabra, T palabraAIngresar) {
+    public boolean insertarYDesplazar(int pos, T dato) {
         if(esLlena()){
          super.borrarFin();   
         }
-        super.agregarEnPosicion(palabraAIngresar, posicionPalabra);
+        return super.agregarEnPosicion(dato, pos);
     }
 }

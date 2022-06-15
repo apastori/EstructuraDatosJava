@@ -93,7 +93,9 @@ public class TRABAJARCONOBLIGATORIO {
         "Insertar y desplazar Palabra: ERROR contacto no existe ");
         p.ver(obl.insertarPalabraYDesplazar(2, 99, 1, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
         "Insertar y desplazar Palabra: ERROR mensaje no existe");
-        p.ver(obl.insertarPalabraYDesplazar(2, 1, 2, 2, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        p.ver(obl.insertarPalabraYDesplazar(2, 99, 99, 1, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
+        "Insertar y desplazar Palabra: ERROR linea no existe");
+        p.ver(obl.insertarPalabraYDesplazar(2, 1, 2, 99, "DESP ERROR").resultado, Retorno.Resultado.ERROR,
         "Insertar y desplazar Palabra: ERROR posición palabra incorrecta");
         
         p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 1").resultado, Retorno.Resultado.OK,
@@ -122,8 +124,12 @@ public class TRABAJARCONOBLIGATORIO {
         "Borrar palabra: Error al borrar palabra no se enceuntra contacto 99");
         p.ver(obl.borrarPalabra(2, 99, 5, 1).resultado, Retorno.Resultado.ERROR, 
         "Borrar palabra: Error al borrar palabra no se enceuntra mensaje 99");
-        p.ver(obl.borrarPalabra(2, 1, 5, 1).resultado, Retorno.Resultado.ERROR, 
-        "Borrar palabra: Error al borrar palabra de posicion 1 de linea 5");
+        
+        p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
+        "mostrar mensaje contacto 2 a contacto 1"); 
+        p.ver(obl.borrarPalabra(2, 1, 99, 1).resultado, Retorno.Resultado.ERROR, 
+        "Borrar palabra: Error al borrar palabra de posicion 1 de linea 99");
+
         p.ver(obl.borrarPalabra(2, 1, 1, 3).resultado, Retorno.Resultado.ERROR, 
         "Borrar palabra: Error al borrar palabra de posicion 3 de linea 1");
 
@@ -160,11 +166,9 @@ public class TRABAJARCONOBLIGATORIO {
         
         p.ver(obl.borrarTodo(2, 99).resultado, Retorno.Resultado.ERROR,
         "Borrar todo: Mensaje inexistente");
-        p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, 
-                " sistema eliminado");
-        
-                
-   
+
+        p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, " sistema eliminado");
+
         p.imprimirResultadosPrueba();
     }
 }

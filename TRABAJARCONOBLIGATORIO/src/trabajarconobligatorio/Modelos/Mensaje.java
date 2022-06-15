@@ -47,7 +47,7 @@ public class Mensaje implements Comparable<Mensaje> {
         if (!this.Lineas.esVacia()) {
             Nodo<Linea> lineaActual = this.Lineas.getInicio();
             int contador = 1;
-            while (lineaActual.getSiguiente() != null) {
+            while (lineaActual != null) {
                 textoMensaje += (contador + ": ") + lineaActual.getDato().imprimirLinea() + "\n";
                 lineaActual = lineaActual.getSiguiente();
                 contador++;
@@ -141,7 +141,9 @@ public class Mensaje implements Comparable<Mensaje> {
         if(Palabras.esLlena()){
             aux = Palabras.getFin().getDato();
         }
-        Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar);
+        if(!Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar)){
+            return false;
+        }
         if( nLineaSiguiente == null){
             insertarLineaFinal();
         }
