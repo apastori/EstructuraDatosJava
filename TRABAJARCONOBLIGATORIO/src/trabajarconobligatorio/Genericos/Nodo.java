@@ -37,4 +37,5 @@ public class Nodo<T extends Comparable<T>> {
     public void setAnterior(Nodo<T> anterior) {
         this.anterior = anterior;
     }
+
 }

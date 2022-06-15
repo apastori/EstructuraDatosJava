@@ -94,4 +94,18 @@ public class Mensaje implements Comparable<Mensaje> {
         return Lineas.agregarEnPosicion(n, posicionLinea);
 
     }
+
+    public void borrarOcurrenciasPalabraEnMensaje(String palabraABorrar) {
+        Nodo<Linea> actual = this.Lineas.getInicio(); 
+        while (actual.getSiguiente() != null) {
+            actual.borrarOcurrenciasPalabraEnLinea(actual);
+            actual = actual.getSiguiente();
+        }
+    }
+
+    void borrarOcurrenciasPalabraLinea(int posicionLinea, String palabraABorrar) {
+        
+    }
+    
+    
 }

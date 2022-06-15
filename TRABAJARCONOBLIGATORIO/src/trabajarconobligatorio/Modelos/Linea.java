@@ -27,11 +27,22 @@ public class Linea implements Comparable<Linea> {
         }
         return textoLinea;
     }
-    
+
     
     @Override
     public int compareTo(Linea o) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    void borrarOcurrenciaPalabra(String palabraABorrar) {
+        borrarOcurrenciaPalabraRecursivo(this.Palabras.getInicio(), palabraABorrar);
+    }
+    
+    void borrarOcurrenciaPalabraRecursivo(Nodo<String> inicio, String palabraABorrar) {
+        if (inicio == null) {
+            return;
+        }
+        borrarOcurrenciaPalabraRecursivo(inicio.getSiguiente(), palabraABorrar);
     }
 }
