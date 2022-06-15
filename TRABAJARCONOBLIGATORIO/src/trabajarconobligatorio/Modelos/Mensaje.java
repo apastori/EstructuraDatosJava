@@ -124,7 +124,10 @@ public class Mensaje implements Comparable<Mensaje> {
     }
 
     public void borrarOcurrenciasPalabraLinea(int posicionLinea, String palabraABorrar) {
-        
+        Nodo<Linea> lineaPos = this.Lineas.getNodoPorPos(posicionLinea);
+        if (lineaPos != null) {
+            lineaPos.getDato().borrarOcurrenciaPalabra(palabraABorrar);
+        }
     }
     
     public boolean borrarLineaEnPosicion(int posicionLinea) {       

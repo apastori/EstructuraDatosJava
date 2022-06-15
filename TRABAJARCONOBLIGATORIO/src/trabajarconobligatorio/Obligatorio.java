@@ -134,6 +134,15 @@ public class Obligatorio implements IObligatorio {
         }
         return ret;
     }
+    
+    @Override
+    public Retorno borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, String palabraABorrar) {
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if (Sistema.borrarOcurrenciasPalabraEnLinea(numContactoOrigen, numMensaje, posicionLinea, palabraABorrar)) {
+            ret.resultado = Retorno.Resultado.OK;
+        }
+        return ret;
+    }
 
     @Override
     public Retorno insertarPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, int posicionPalabra,
@@ -167,15 +176,6 @@ public class Obligatorio implements IObligatorio {
         return ret;        
     }
 
-    @Override
-    public Retorno borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea,
-        String palabraABorrar) {
-        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
-        if (Sistema.borrarOcurrenciasPalabraEnLinea(numContactoOrigen, numMensaje, posicionLinea, palabraABorrar)) {
-            ret.resultado = Retorno.Resultado.OK;
-        }
-        return ret;
-    }
 
     @Override
     public Retorno imprimirLinea(int numContactoOrigen, int numMensaje, int posicionLinea) {
