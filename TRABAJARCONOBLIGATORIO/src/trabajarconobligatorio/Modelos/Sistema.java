@@ -104,6 +104,32 @@ public class Sistema {
         return false;
     }
 
+    public boolean borrarOcurrenciasPalabraEnTexto(int numContactoOrigen, int numMensaje, String palabraABorrar) {
+        boolean borrarOcurrenciasPalabraTexto = false;
+        Contacto contacto = getContactoPorNumero(numContactoOrigen);
+        if (contacto != null) {
+            Mensaje mensaje = contacto.getMensajePorId(numMensaje);
+            if (mensaje != null) {
+                mensaje.borrarOcurrenciasPalabraEnMensaje(palabraABorrar);
+                borrarOcurrenciasPalabraTexto = true;
+            }
+        }
+        return borrarOcurrenciasPalabraTexto;
+    }
+
+    public boolean borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea, String palabraABorrar) {
+        boolean borrarOcurrenciasPalabraLinea = false;
+        Contacto contacto = getContactoPorNumero(numContactoOrigen);
+        if (contacto != null) {
+            Mensaje mensaje = contacto.getMensajePorId(numMensaje);
+            if (mensaje != null) {
+                mensaje.borrarOcurrenciasPalabraLinea(posicionLinea, palabraABorrar);
+                borrarOcurrenciasPalabraLinea = true;
+            }
+        }
+        return borrarOcurrenciasPalabraLinea;
+    }
+
     public boolean borrarTodo(int numContactoOrigen, int numMensaje) {
         Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
         if(contactoOrigen != null ){

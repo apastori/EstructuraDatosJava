@@ -112,6 +112,20 @@ public class TRABAJARCONOBLIGATORIO {
         "Insertar y desplazar Palabra: Insertar al principio");
         p.ver(obl.insertarPalabraYDesplazar(2, 1, 1, 1, "DESP 7").resultado, Retorno.Resultado.OK,
         "Insertar y desplazar Palabra: Insertar al principio");
+        // Pruebas para Funcionalidad 3.6
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(100, 1, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el contacto 100 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(2, 500, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el mensaje 500 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnTexto(2, 1, "DESP 5").resultado, Retorno.Resultado.OK,
+        "Borrar Palabra DESP 5");
+        
+        p.ver(obl.borrarOcurrenciasPalabraEnLinea(100, 1, 1, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el contacto 100 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnLinea(2, 500, 1, "DESP 5").resultado, Retorno.Resultado.ERROR,
+        "Tiene como resultado Error porque el mensaje 500 no existe");
+        p.ver(obl.borrarOcurrenciasPalabraEnLinea(2, 1, 1, "DESP 5").resultado, Retorno.Resultado.OK,
+        "Borrar Palabra DESP 5");
         
         p.ver(obl.imprimirTexto(2, 1).resultado, Retorno.Resultado.OK, 
         "mostrar mensaje contacto 2 a contacto 1"); 

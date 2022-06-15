@@ -110,6 +110,26 @@ public class Mensaje implements Comparable<Mensaje> {
 
     }
 
+    public void borrarOcurrenciasPalabraEnMensaje(String palabraABorrar) {
+        Nodo<Linea> actual = this.Lineas.getInicio(); 
+        this.borrarOcurrenciaPalabraMensajeRecursivo(actual, palabraABorrar);
+    }
+    
+    public void borrarOcurrenciaPalabraMensajeRecursivo(Nodo<Linea> inicio, String palabraABorrar) {
+        if (inicio == null) {
+            return;
+        }
+        inicio.getDato().borrarOcurrenciaPalabra(palabraABorrar);
+        borrarOcurrenciaPalabraMensajeRecursivo(inicio.getSiguiente(), palabraABorrar);
+    }
+
+    public void borrarOcurrenciasPalabraLinea(int posicionLinea, String palabraABorrar) {
+        Nodo<Linea> lineaPos = this.Lineas.getNodoPorPos(posicionLinea);
+        if (lineaPos != null) {
+            lineaPos.getDato().borrarOcurrenciaPalabra(palabraABorrar);
+        }
+    }
+    
     public boolean borrarLineaEnPosicion(int posicionLinea) {       
         return Lineas.borrarEnPosicion(posicionLinea);
     }
