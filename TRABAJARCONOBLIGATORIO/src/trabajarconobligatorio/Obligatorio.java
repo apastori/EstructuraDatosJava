@@ -188,19 +188,32 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno ingresarPalabraDiccionario(String palabraAIngresar) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if(Sistema.ingresarPalabraDiccionario(palabraAIngresar)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
+        return ret;
+    }
+    @Override
+    public Retorno borrarPalabraDiccionario(String palabraABorrar) {
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if(Sistema.borrarPalabraDiccionario(palabraABorrar)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 
     @Override
     public Retorno imprimirDiccionario() {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        Sistema.imprimirDiccionario();
         return ret;
     }
 
     @Override
     public Retorno ImprimirTextoIncorrecto() {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        Sistema.ImprimirTextoIncorrecto();
         return ret;
     }
 

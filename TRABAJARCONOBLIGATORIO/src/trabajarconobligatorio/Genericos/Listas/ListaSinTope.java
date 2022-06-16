@@ -77,14 +77,15 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
             // Si tiene un solo elemento
             if (cantidad == 1) {
                 inicio = null;
-                fin = inicio;
+                fin = null;
+                cantidad = 0;
             } else {
                 Nodo<T> borrar = fin;
                 fin = borrar.getAnterior();
                 fin.setSiguiente(null);
                 borrar.setAnterior(null);
+                cantidad--;
             }
-            cantidad--;
         }
     }
 
@@ -110,12 +111,13 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
         if (ultimo == null){
             inicio = null;
             fin = null;
+            cantidad = 0;
             return;
         }
-        Nodo<T> aux = ultimo.getAnterior();
+        Nodo<T> anterior = ultimo.getAnterior();
         ultimo.setSiguiente(null);
         ultimo.setAnterior(null);
-        vaciarRecursivo(aux);
+        vaciarRecursivo(anterior);
     }
 
     @Override
@@ -175,13 +177,16 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
             if (fin.getDato().compareTo(n) < 0) {
                 agregarFinal(n);
             } else {
-                Nodo<T> aux = inicio;
-                while (aux.getSiguiente() != null && aux.getSiguiente().getDato().compareTo(n) < 0) {
-                    aux = aux.getSiguiente();
+                Nodo<T> anterior = inicio;
+                while (anterior.getSiguiente() != null && anterior.getSiguiente().getDato().compareTo(n) < 0) {
+                    anterior = anterior.getSiguiente();
                 }
                 Nodo<T> nuevo = new Nodo<T>(n);
-                nuevo.setSiguiente(aux.getSiguiente());
-                aux.setSiguiente(nuevo);
+                Nodo<T> siguiente = anterior.getSiguiente();
+                nuevo.setSiguiente(siguiente);
+                anterior.setSiguiente(nuevo);
+                nuevo.setAnterior(anterior);
+                siguiente.setAnterior(nuevo);
             }
 
         }
@@ -226,7 +231,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
 
             if (medio.getDato().equals(obj)) {
                 return medio;
-            } else if (medio.getDato().compareTo(obj) == -1) {
+            } else if (medio.getDato().compareTo(obj) < 0) {
                 inicio = medio.getSiguiente();
             } else {
                 fin = medio;
@@ -236,20 +241,23 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
         return null;
     }
   
-    public void insertarFinalRecursivo(Nodo<T> inicio, T objeto) {
+    public void insertarFinalRecursivo(Nodo<T> actual, T objeto) {
         Nodo<T> nuevoNodo = new Nodo<T>(objeto);
-        if (inicio == null) {
+        if (actual == null) {
             inicio = nuevoNodo;
             fin = nuevoNodo;
-            return;
-        }
-        if (inicio.getSiguiente() == null) {
-            inicio.setSiguiente(nuevoNodo);
-            nuevoNodo.setAnterior(inicio);
             this.cantidad++;
             return;
         }
-        insertarFinalRecursivo(inicio.getSiguiente(), objeto); 
+        else if (actual.getSiguiente() == null) {
+            actual.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(actual);
+            fin = nuevoNodo;
+            this.cantidad++;
+            return;
+        } else {
+            insertarFinalRecursivo(actual.getSiguiente(), objeto); 
+        }
     }
   
 

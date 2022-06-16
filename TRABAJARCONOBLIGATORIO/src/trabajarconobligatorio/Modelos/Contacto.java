@@ -38,7 +38,6 @@ public class Contacto implements Comparable<Contacto> {
         this.nombre = nombre;
     }
 
-    // TODO: Revisar si se usa al final
     public ListaSinTope<Mensaje> getMensajesPorDestinatario(int numero){
         ListaSinTope<Mensaje> ret = new ListaSinTope<Mensaje>();
 
@@ -187,6 +186,15 @@ public class Contacto implements Comparable<Contacto> {
             return mensaje.insertarPalabraEnLinea(posicionLinea, posicionPalabra, palabraAIngresar);
         }
         return false; 
+    }
+
+    public void ImprimirTextoIncorrecto(ListaSinTope<String> palabrasCorrectas) {
+        Nodo<Mensaje> nMensaje = Mensajes.getInicio();
+
+        while(nMensaje != null){
+            nMensaje.getDato().ImprimirTextoIncorrecto(palabrasCorrectas);
+            nMensaje = nMensaje.getSiguiente();
+        }
     }
 
 }

@@ -8,10 +8,12 @@ import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 public class Sistema {
     private ListaSinTope<Contacto> listaContactos;
     private Integer MAX_CANT_PALABRAS_X_LINEA;
+    private Diccionario diccionario;
 
     public Sistema(int MAX_CANT_PALABRAS_X_LINEA) {
         listaContactos = new ListaSinTope<Contacto>();
         this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
+        diccionario = new Diccionario();
     }
 
     public void destruir() {
@@ -196,5 +198,28 @@ public class Sistema {
             }
         }
         return false;
+    }
+
+    public boolean ingresarPalabraDiccionario(String palabraAIngresar) {
+        return diccionario.ingresarPalabra(palabraAIngresar);
+    }
+
+    public boolean borrarPalabraDiccionario(String palabraABorrar) {
+        return diccionario.borrarPalabra(palabraABorrar);
+    }
+
+    public void imprimirDiccionario() {
+        diccionario.imprimirDiccionario();
+    }
+
+    public void ImprimirTextoIncorrecto() {
+        Nodo<Contacto> nContacto = listaContactos.getInicio();
+
+        while(nContacto != null){
+            System.out.println("--- Mensajes de: " + nContacto.getDato().getNombre() + " nº: " + nContacto.getDato().getNumero() + " ---");
+            nContacto.getDato().ImprimirTextoIncorrecto(diccionario.getPalabras());
+
+            nContacto = nContacto.getSiguiente();
+        }
     }
 }

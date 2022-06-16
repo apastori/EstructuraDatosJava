@@ -2,6 +2,8 @@ package trabajarconobligatorio.Modelos;
 
 import java.util.Date;
 
+import javax.sound.sampled.Line;
+
 import trabajarconobligatorio.Genericos.Listas.ListaConTope;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 import trabajarconobligatorio.Genericos.Nodo;
@@ -164,7 +166,7 @@ public class Mensaje implements Comparable<Mensaje> {
         if(!Palabras.insertarYDesplazar(posicionPalabra, palabraAIngresar)){
             return false;
         }
-        if( nLineaSiguiente == null){
+        if( nLineaSiguiente == null && aux != null){
             insertarLineaFinal();
         }
 
@@ -181,5 +183,20 @@ public class Mensaje implements Comparable<Mensaje> {
             return Palabras.borrarEnPosicion(posicionPalabra);
         }
         return false;
+    }
+
+    public void ImprimirTextoIncorrecto(ListaSinTope<String> palabrasCorrectas) {
+        System.out.println("Mensaje: " + id + " Destino: " + numContactoDestino);
+        if(!Lineas.esVacia()) {
+            Nodo<Linea> lineaActual = Lineas.getInicio();
+            int contador = 1;
+            while (lineaActual != null) {
+                System.out.println((contador + ": ") + lineaActual.getDato().ImprimirTextoIncorrecto(palabrasCorrectas));
+                lineaActual = lineaActual.getSiguiente();
+                contador++;
+            }       
+        } else {
+            System.out.println("Texto vacio");
+        }
     }
 }

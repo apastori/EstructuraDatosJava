@@ -1,8 +1,6 @@
 package trabajarconobligatorio.Genericos.Listas;
 
-import trabajarconobligatorio.Interfaces.Listas.ILista;
-
-public class ListaConTope<T extends Comparable<T>> extends ListaSinTope<T> implements ILista<T> {
+public class ListaConTope<T extends Comparable<T>> extends ListaSinTope<T> {
     private int tope;
 
     // Constructor

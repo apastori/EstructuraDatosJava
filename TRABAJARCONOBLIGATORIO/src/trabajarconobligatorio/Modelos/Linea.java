@@ -2,6 +2,7 @@ package trabajarconobligatorio.Modelos;
 
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Listas.ListaConTope;
+import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 
 public class Linea implements Comparable<Linea> {
     private ListaConTope<String> Palabras;
@@ -35,12 +36,6 @@ public class Linea implements Comparable<Linea> {
         return Palabras.agregarEnPosicion(palabraAIngresar, posicionPalabra);
     }
     
-    @Override
-    public int compareTo(Linea o) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
     void borrarOcurrenciaPalabra(String palabraABorrar) {
         borrarOcurrenciaPalabraRecursivo(this.Palabras.getInicio(), palabraABorrar);
     }
@@ -49,9 +44,11 @@ public class Linea implements Comparable<Linea> {
         if (inicio == null) {
             return;
         }
+        
+        Nodo<String> anterior = inicio.getAnterior();
+        Nodo<String> siguiente = inicio.getSiguiente();
+
         if (inicio.getDato().equals(palabraABorrar)) {
-            Nodo<String> anterior = inicio.getAnterior();
-            Nodo<String> siguiente = inicio.getSiguiente();
             if (anterior == null) {
                 this.Palabras.borrarInicio();
             } else if (siguiente == null) {
@@ -61,6 +58,27 @@ public class Linea implements Comparable<Linea> {
                 siguiente.setAnterior(anterior);
             }
         }
-        borrarOcurrenciaPalabraRecursivo(inicio.getSiguiente(), palabraABorrar);
+        borrarOcurrenciaPalabraRecursivo(siguiente, palabraABorrar);
+    }
+
+    @Override
+    public int compareTo(Linea o) {
+        return 0;
+    }
+
+    public String ImprimirTextoIncorrecto(ListaSinTope<String> palabrasCorrectas) {
+        String palabrasIncorrectas = "";
+
+        var palabraActual = Palabras.getInicio();
+        while (palabraActual != null){
+
+            if(palabrasCorrectas.busquedaBinaria(palabrasCorrectas.getInicio(), palabraActual.getDato()) == null){
+                palabrasIncorrectas += palabraActual.getDato() + " ";
+            }
+            palabraActual = palabraActual.getSiguiente();
+        }
+
+
+        return palabrasIncorrectas;
     }
 }

@@ -26,6 +26,7 @@ Retorno borrarPalabra(int numContactoOrigen, int numMensaje, int posicionLinea, 
 Retorno borrarOcurrenciasPalabraEnLinea(int numContactoOrigen, int numMensaje, int posicionLinea , String palabraABorrar);
 Retorno imprimirLinea(int numContactoOrigen, int numMensaje, int posicionLinea);
 Retorno ingresarPalabraDiccionario(String palabraAIngresar);
+Retorno borrarPalabraDiccionario(String palabraABorrar);
 Retorno imprimirDiccionario();
 Retorno ImprimirTextoIncorrecto();
 Retorno cantidadDeMensajes(int numContactoOrigen);
