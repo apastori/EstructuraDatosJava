@@ -81,4 +81,8 @@ public class Linea implements Comparable<Linea> {
 
         return palabrasIncorrectas;
     }
+
+    public void destruir() {
+        Palabras.vaciar();
+    }
 }

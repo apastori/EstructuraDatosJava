@@ -22,7 +22,9 @@ public class Obligatorio implements IObligatorio {
     @Override
     public Retorno crearSistemaMensajes(int MAX_CANT_PALABRAS_X_LINEA) {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
-        Sistema = new Sistema(MAX_CANT_PALABRAS_X_LINEA);
+        if(MAX_CANT_PALABRAS_X_LINEA >= 1){
+            Sistema = new Sistema(MAX_CANT_PALABRAS_X_LINEA);
+        }
         return ret;
     }
 

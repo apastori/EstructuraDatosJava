@@ -18,6 +18,11 @@ public class Sistema {
 
     public void destruir() {
         MAX_CANT_PALABRAS_X_LINEA = null;
+        Nodo<Contacto> contactoActual = listaContactos.getInicio();
+        while(contactoActual != null){
+            contactoActual.getDato().destruir();
+            contactoActual = contactoActual.getSiguiente();
+        }
         listaContactos.vaciar();
     }
 
@@ -35,6 +40,7 @@ public class Sistema {
         Contacto contactoBuscado = new Contacto(numContacto);  
         if (listaContactos.busquedaBinaria(listaContactos.getInicio(), contactoBuscado) != null) {
             listaContactos.borrarElemento(contactoBuscado);
+            contactoBuscado.destruir();
             return true;
         } else {
             return false;

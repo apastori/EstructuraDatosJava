@@ -7,10 +7,11 @@ import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 
 public class Contacto implements Comparable<Contacto> {
-    private int numero;
+    private Integer numero;
     private String nombre;
     private ListaSinTope<Mensaje> Mensajes;
-    private int MAX_CANT_PALABRAS_X_LINEA;
+    private Integer ultimoId = 0;
+    private Integer MAX_CANT_PALABRAS_X_LINEA;
 
     public Contacto(int elNumero, String elNombre, int MAX_CANT_PALABRAS_X_LINEA) {
         this.setNumero(elNumero);
@@ -58,7 +59,8 @@ public class Contacto implements Comparable<Contacto> {
     }
 
     public void agregarMensaje(int numContactoDestino, Date fecha){
-        int nuevoId = Mensajes.getCantidadElementos() + 1;
+        ultimoId++;
+        int nuevoId = ultimoId;
         Mensaje nuevoMensaje = new Mensaje(numContactoDestino, fecha, nuevoId, MAX_CANT_PALABRAS_X_LINEA);
         Mensajes.agregarFinal(nuevoMensaje);
     }
@@ -235,7 +237,6 @@ public class Contacto implements Comparable<Contacto> {
                 if(destinos.busquedaBinaria(primerDestino, contactoPreexistente.getDato()) == null){
                     // Si el contacto no está entre los destinos, agregarlo.
                     destinos.agregarOrd(contactoPreexistente.getDato());
-                    System.out.println("AGREGADO: " + contactoPreexistente.getDato().getNombre());
                 }
             // El contacto ya NO existe en el sistema porque fue eliminado.
             } else {
@@ -243,7 +244,6 @@ public class Contacto implements Comparable<Contacto> {
                 if(destinos.busquedaBinaria(primerDestino, aux) == null){
                     // Si el contacto no está entre los destinos, agregarlo.
                     destinos.agregarOrd(aux);
-                    System.out.println("AGREGADO: " + aux.getNombre());
                 }
             }
             mensajeActual = mensajeActual.getSiguiente();
@@ -327,6 +327,20 @@ public class Contacto implements Comparable<Contacto> {
         }
     
         System.out.println(matriz);
+    }
+
+    public void destruir() {
+        numero = null;
+        nombre = null;
+        MAX_CANT_PALABRAS_X_LINEA = null;
+        if(Mensajes != null){
+            Nodo<Mensaje> mActual = Mensajes.getInicio();
+            while (mActual != null){
+                mActual.getDato().destruir();
+                mActual = mActual.getSiguiente();
+            }
+            Mensajes.vaciar();
+        }
     }
 
 

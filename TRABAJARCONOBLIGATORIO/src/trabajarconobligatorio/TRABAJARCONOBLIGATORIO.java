@@ -23,8 +23,8 @@ public class TRABAJARCONOBLIGATORIO {
         Obligatorio obl = new Obligatorio();
         Prueba p = new Prueba();
         //juegodeprueba1(obl, p); 
-        //juegodeprueba3(obl, p);
-        pruebasMatriz(obl, p);
+        juegodeprueba3(obl, p);
+        //pruebasMatriz(obl, p);
     }
 
     public static void juegodeprueba1(Obligatorio obl, Prueba p) throws ParseException {

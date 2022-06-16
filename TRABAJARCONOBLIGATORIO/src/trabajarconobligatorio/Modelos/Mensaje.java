@@ -10,11 +10,11 @@ import trabajarconobligatorio.Genericos.Nodo;
 
 public class Mensaje implements Comparable<Mensaje> {
 
-    private int numContactoDestino;
+    private Integer numContactoDestino;
     private Date fecha;
-    private int id;
+    private Integer id;
     public ListaSinTope<Linea> Lineas;
-    private int MAX_CANT_PALABRAS_X_LINEA;
+    private Integer MAX_CANT_PALABRAS_X_LINEA;
 
     public Mensaje(int elDestino, Date laFecha, int id, int MAX_CANT_PALABRAS_X_LINEA) {
         this.numContactoDestino = elDestino;
@@ -198,5 +198,18 @@ public class Mensaje implements Comparable<Mensaje> {
         } else {
             System.out.println("Texto vacio");
         }
+    }
+
+    public void destruir() {
+        this.numContactoDestino = null;
+        this.id = null;
+        this.MAX_CANT_PALABRAS_X_LINEA = null;
+        this.fecha = null;
+        Nodo<Linea> lActual = Lineas.getInicio();
+        while ( lActual != null ){
+            lActual.getDato().destruir();
+            lActual = lActual.getSiguiente();
+        }
+        Lineas.vaciar();
     }
 }
