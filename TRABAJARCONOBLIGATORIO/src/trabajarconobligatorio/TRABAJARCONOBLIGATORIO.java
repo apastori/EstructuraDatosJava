@@ -22,8 +22,8 @@ public class TRABAJARCONOBLIGATORIO {
     public static void main(String[] args) throws ParseException {
         Obligatorio obl = new Obligatorio();
         Prueba p = new Prueba();
-        //juegodeprueba1(obl, p); 
-        juegodeprueba3(obl, p);
+        juegodeprueba1(obl, p); 
+        //juegodeprueba3(obl, p);
         //pruebasMatriz(obl, p);
     }
 

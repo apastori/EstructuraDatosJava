@@ -30,12 +30,15 @@ public interface IObligatorio {
     //pos: El mensaje recibe un id en base 
     Retorno agregarMensaje(int numContactoOrigen, int numContactoDestino, Date fecha);
     
-    //pre:
-    //pos:
+    //pre: numContactoOrigen debe existir en el sistema.
+    //pre: numMensaje debe existir dentro de los mensajes del Contacto indicado.
+    //pos: Elimina el mensaje vinculado y libera la memoria.
     Retorno eliminarMensaje(int numContactoOrigen, int numMensaje);
     
-    //pre:
-    //pos:
+    //pre: numContactoOrigen debe existir en el sistema.
+    //pre: numMensaje debe existir dentro de los mensajes del Contacto indicado.    
+    //pos: Muestra todas las lineas del mensaje numeradas, con sus respectivas palabras.
+    //pos: Si el mensaje no tiene líneas muestra "Texto vacío".
     Retorno imprimirTexto(int numContactoOrigen, int numMensaje);
     
     //pre:

@@ -81,6 +81,7 @@ public class Contacto implements Comparable<Contacto> {
 
         mensajeAEliminar.setAnterior(null);
         mensajeAEliminar.setSiguiente(null);
+        mensajeAEliminar.getDato().destruir();
         return true;
     }
     
