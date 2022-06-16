@@ -1,5 +1,6 @@
 package trabajarconobligatorio.Modelos;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import trabajarconobligatorio.Genericos.Nodo;
@@ -20,6 +21,10 @@ public class Contacto implements Comparable<Contacto> {
 
     public Contacto(int elNumero) {
         this.setNumero(elNumero);
+    }
+    public Contacto(int elNumero, String elNombre) {
+        this.setNumero(elNumero);
+        this.setNombre(elNombre);
     }
 
     public int getNumero() {
@@ -167,7 +172,7 @@ public class Contacto implements Comparable<Contacto> {
     }
 
     public String toString() {
-        return "Numero: " + this.getNumero() + " Nombre: " + this.getNombre();
+        return "Nº: " + this.getNumero() + " Nombre: " + this.getNombre();
     }
 
     public boolean insertarPalabraYDesplazar(int numMensaje, int posicionLinea, int posicionPalabra, String palabraAIngresar) {
@@ -196,5 +201,133 @@ public class Contacto implements Comparable<Contacto> {
             nMensaje = nMensaje.getSiguiente();
         }
     }
+
+    public void cantidadDeMensajes(ListaSinTope<Contacto> listaContactos) {
+
+        // Variables que corresponde a los ejes de la Matriz.
+        ListaSinTope<Date> fechasDeEnvio = new ListaSinTope<Date>();
+        ListaSinTope<Contacto> destinos = new ListaSinTope<Contacto>();
+
+        // Iteramos sobre cada mensaje para popular los ejes de la matriz.
+        Nodo<Mensaje> mensajeActual = Mensajes.getInicio();
+        while (mensajeActual != null) {
+            
+            // EJE DE FECHAS
+            Date fechaMensaje =  mensajeActual.getDato().getFecha();
+            Nodo<Date> primeraFecha = fechasDeEnvio.getInicio();
+
+            if(fechasDeEnvio.busquedaBinaria(primeraFecha, fechaMensaje) == null){
+                fechasDeEnvio.agregarOrd(fechaMensaje);
+            }
+
+
+            // EJE DE CONTACTOS
+            // listaContactos refiere a los que están actualmente en el sistema y podemos acceder a su nombre.
+            Nodo<Contacto> primerContacto = listaContactos.getInicio(); 
+            // destinos refiere a aquellos contactos (actualmente en el sistema o eliminado) a los que el origen envió un mensaje.
+            Nodo<Contacto> primerDestino = destinos.getInicio();
+
+            int numDestino = mensajeActual.getDato().getNumContactoDestino();
+
+            // El contacto YA existe en el sistema. Ergo, agregarlo con su nombre correspondiente.
+            Nodo<Contacto> contactoPreexistente = listaContactos.busquedaBinaria(primerContacto, new Contacto(numDestino));
+            if(contactoPreexistente != null) {
+                if(destinos.busquedaBinaria(primerDestino, contactoPreexistente.getDato()) == null){
+                    // Si el contacto no está entre los destinos, agregarlo.
+                    destinos.agregarOrd(contactoPreexistente.getDato());
+                    System.out.println("AGREGADO: " + contactoPreexistente.getDato().getNombre());
+                }
+            // El contacto ya NO existe en el sistema porque fue eliminado.
+            } else {
+                Contacto aux = new Contacto(numDestino, "Eliminado");
+                if(destinos.busquedaBinaria(primerDestino, aux) == null){
+                    // Si el contacto no está entre los destinos, agregarlo.
+                    destinos.agregarOrd(aux);
+                    System.out.println("AGREGADO: " + aux.getNombre());
+                }
+            }
+            mensajeActual = mensajeActual.getSiguiente();
+        }
+        
+        int Filas = destinos.getCantidadElementos()+1;
+        int Columnas = destinos.getCantidadElementos()+1;
+        String[][] mat = new String[Filas][Columnas];
+
+        mat = llenarMatriz(mat, destinos, fechasDeEnvio);
+
+        mostrarMatriz(mat);
+    }
+
+    private String[][] llenarMatriz(String[][] mat, ListaSinTope<Contacto> destinos, ListaSinTope<Date> fechasDeEnvio) {
+        mat[0][0] = "Destinos \\ Fechas \t\t\t|";
+        
+        // Las filas (menos la 0) representan los destinos.
+        for(int fila=0; fila<mat.length; fila++){
+
+            Contacto destino = null;
+            ListaSinTope<Mensaje> mensajes = null;
+
+            // Si no estoy en la fila 0, obtengo el destino y sus mensajes.
+            if(fila>0){
+                destino = destinos.getNodoPorPos(fila).getDato();
+                mensajes = getMensajesPorDestinatario(destino.getNumero());
+            }
+
+            // Las columnas (menos la 0) representan las fechas en las que se envió un mensaje.
+            for(int col=0; col<mat[fila].length; col++){
+
+                Date fecha = null;
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+                // Si no estoy en la columna 0, obtengo la fecha
+                if (col > 0){
+                    fecha = fechasDeEnvio.getNodoPorPos(col).getDato();
+                }
+
+                // Llenar fila FECHAS
+                if(fila == 0 && col > 0){
+                    mat[fila][col] = formato.format(fecha) + "\t\t|";
+                }
+                // Llenar columna Contactos
+                if(fila > 0 && col == 0){
+                    mat[fila][col] = destino.toString()+ "\t\t\t|";
+                }
+                // Llenar celdas con datos
+                if(fila > 0 && col > 0){
+                    mat[fila][col] = getCantMensajesFecha(mensajes, fecha).toString()+ "\t\t\t|";
+                }
+            }
+        }
+
+        return mat;
+    }
+
+    private Integer getCantMensajesFecha(ListaSinTope<Mensaje> listaMensajes, Date fecha) {
+        int contador = 0;
+
+        Nodo<Mensaje> mActual = listaMensajes.getInicio();
+        while (mActual != null){
+            if(mActual.getDato().getFecha().equals(fecha)){
+                contador++;
+            }
+            mActual = mActual.getSiguiente();
+        }
+        return contador;
+    }
+
+    private void mostrarMatriz(String[][] mat) {
+        String matriz = "";
+        
+        for(int i=0; i<mat.length; i++){
+            for(int j=0; j<mat[i].length; j++){
+                matriz += mat[i][j] + " ";
+            }
+            
+            matriz += "\n";
+        }
+    
+        System.out.println(matriz);
+    }
+
 
 }

@@ -219,7 +219,10 @@ public class Obligatorio implements IObligatorio {
 
     @Override
     public Retorno cantidadDeMensajes(int numContactoOrigen) {
-        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.ERROR);
+        if(Sistema.cantidadDeMensajes(numContactoOrigen)){
+            ret.resultado = Retorno.Resultado.OK;
+        }
         return ret;
     }
 

@@ -22,8 +22,9 @@ public class TRABAJARCONOBLIGATORIO {
     public static void main(String[] args) throws ParseException {
         Obligatorio obl = new Obligatorio();
         Prueba p = new Prueba();
-        juegodeprueba1(obl, p); // juego de prueba ejemplo
+        //juegodeprueba1(obl, p); 
         //juegodeprueba3(obl, p);
+        pruebasMatriz(obl, p);
     }
 
     public static void juegodeprueba1(Obligatorio obl, Prueba p) throws ParseException {
@@ -248,6 +249,48 @@ public class TRABAJARCONOBLIGATORIO {
 
         p.ver(obl.destruirSistemaMensajes().resultado, Retorno.Resultado.OK, " sistema eliminado");
         p.imprimirResultadosPrueba();
+    }
+    public static void pruebasMatriz (Obligatorio obl, Prueba p) throws ParseException {
+        obl.crearSistemaMensajes(3);
+        obl.agregarContacto(1, "Alfo");
+        obl.agregarContacto(2, "Nico");
+        obl.agregarContacto(3, "Rafa");
+        obl.agregarContacto(4, "Seba");
+
+        Date fecha=new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+  
+       //-------------------------------
+        fecha=formato.parse("23/03/2022");
+       //--------------------------------
+        obl.agregarMensaje(1, 4, fecha);
+        obl.agregarMensaje(1, 4, fecha);
+        obl.agregarMensaje(1, 4, fecha);
+        obl.agregarMensaje(1, 4, fecha);
+        obl.agregarMensaje(1, 4, fecha);
+
+        obl.agregarMensaje(1, 2, fecha);
+
+        
+        fecha=formato.parse("30/05/2022");
+        obl.agregarMensaje(1, 4, fecha);
+
+        obl.agregarMensaje(1, 3, fecha);
+
+        obl.agregarMensaje(1, 2, fecha);
+        obl.agregarMensaje(1, 2, fecha);
+
+        
+        fecha=formato.parse("01/04/2022");
+
+        obl.agregarMensaje(1, 3, fecha);
+
+        obl.agregarMensaje(1, 2, fecha);
+
+        obl.eliminarContacto(3);
+
+        obl.cantidadDeMensajes(1);
+
     }
     public static void juegodeprueba3(Obligatorio obl, Prueba p) throws ParseException{
         

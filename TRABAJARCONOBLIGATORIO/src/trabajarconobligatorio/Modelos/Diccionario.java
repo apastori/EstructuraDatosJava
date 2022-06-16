@@ -1,7 +1,5 @@
 package trabajarconobligatorio.Modelos;
 
-import javax.print.attribute.standard.MediaSize.NA;
-
 import trabajarconobligatorio.Genericos.Nodo;
 import trabajarconobligatorio.Genericos.Listas.ListaSinTope;
 

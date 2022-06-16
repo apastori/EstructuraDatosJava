@@ -187,6 +187,7 @@ public class ListaSinTope<T extends Comparable<T>> implements ILista<T>{
                 anterior.setSiguiente(nuevo);
                 nuevo.setAnterior(anterior);
                 siguiente.setAnterior(nuevo);
+                cantidad++;
             }
 
         }

@@ -222,4 +222,13 @@ public class Sistema {
             nContacto = nContacto.getSiguiente();
         }
     }
+
+    public boolean cantidadDeMensajes(int numContactoOrigen) {
+        Contacto contactoOrigen = getContactoPorNumero(numContactoOrigen);
+        if(contactoOrigen != null){
+            contactoOrigen.cantidadDeMensajes(listaContactos);
+            return true;
+        }
+        return false;
+    }
 }
