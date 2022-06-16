@@ -22,9 +22,9 @@ public class TRABAJARCONOBLIGATORIO {
     public static void main(String[] args) throws ParseException {
         Obligatorio obl = new Obligatorio();
         Prueba p = new Prueba();
-        juegodeprueba1(obl, p); 
+        //juegodeprueba1(obl, p); 
         //juegodeprueba3(obl, p);
-        //pruebasMatriz(obl, p);
+        pruebasMatriz(obl, p);
     }
 
     public static void juegodeprueba1(Obligatorio obl, Prueba p) throws ParseException {
@@ -289,7 +289,13 @@ public class TRABAJARCONOBLIGATORIO {
 
         obl.eliminarContacto(3);
 
-        obl.cantidadDeMensajes(1);
+        p.ver(obl.cantidadDeMensajes(99).resultado, Retorno.Resultado.ERROR,
+                "Se intenta mostrar la matriz de un contacto que no existe");
+        p.ver(obl.cantidadDeMensajes(1).resultado, Retorno.Resultado.OK,
+                "Se muestra la matriz correctamente");
+        
+        p.imprimirResultadosPrueba();
+
 
     }
     public static void juegodeprueba3(Obligatorio obl, Prueba p) throws ParseException{
